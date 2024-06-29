@@ -1,8 +1,9 @@
+from django.conf import settings
 import requests
 
-API_KEY = 'RGAPI-d3f39a74-e89d-4a68-a18e-6abeedc175c9'
+API_KEY = settings.RIOT_API_KEY
 
 def get_summoner_data(summoner_name):
-    url = f'https://REGION.api.riotgames.com/lol/summoner/v4/summoners/by-name/{summoner_name}?api_key={RGAPI-d3f39a74-e89d-4a68-a18e-6abeedc175c9}'
+    url = f'https://REGION.api.riotgames.com/lol/summoner/v4/summoners/by-name/{summoner_name}?api_key={API_KEY}'
     response = requests.get(url)
     return response.json()

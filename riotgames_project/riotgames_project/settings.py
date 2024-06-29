@@ -122,3 +122,5 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+RIOT_API_KEY = 'RGAPI-d3f39a74-e89d-4a68-a18e-6abeedc175c9'
