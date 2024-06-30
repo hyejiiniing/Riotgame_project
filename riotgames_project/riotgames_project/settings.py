@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -123,4 +124,4 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-RIOT_API_KEY = 'RGAPI-d3f39a74-e89d-4a68-a18e-6abeedc175c9'
+RIOT_API_KEY = os.getenv('RIOT_API_KEY', 'RGAPI-e819ebc5-4eac-46ec-822b-8948c3dde490')

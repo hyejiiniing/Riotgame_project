@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Champion Rotation</title>
+</head>
+<body>
+    <h1>Current Champion Rotation</h1>
+    <ul>
+        {% for champion in champions %}
+            <li>
+                <img src="{{ champion.image }}" alt="{{ champion.name }}"/>
+                {{ champion.name }}
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
