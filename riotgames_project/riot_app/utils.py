@@ -1,6 +1,7 @@
 import requests
 import os
 
+# 로테이션 챔피언 목록 가져오기
 def get_champion_rotation():
     api_key = os.getenv('RIOT_API_KEY')
     url = f"https://kr.api.riotgames.com/lol/platform/v3/champion-rotations?api_key={api_key}"
@@ -10,6 +11,7 @@ def get_champion_rotation():
     else:
         return {"status": {"status_code": response.status_code, "message": response.text}}
 
+# 모든 챔피언 데이터 가져오기
 def get_champion_data():
     url = "https://ddragon.leagueoflegends.com/cdn/11.24.1/data/en_US/champion.json"
     response = requests.get(url)
@@ -18,6 +20,7 @@ def get_champion_data():
     else:
         return None
 
+# 챔피언 ID를 이름으로 매핑
 def map_champion_id_to_name(champion_data):
     id_to_name = {}
     for champ in champion_data['data'].values():

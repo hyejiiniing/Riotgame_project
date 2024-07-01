@@ -87,20 +87,40 @@
 
           <!-- 로테이션 -->
           <div class="most-popular">
+            <div class="heading-section">
+                <h4><em>Current</em> Champion Rotation</h4>
+            </div>
+            <div class="item">
+                <div style="display: flex; flex-wrap: wrap; justify-content: center;">
+                    {% for champion in champions %}
+                        <div style="margin: 10px; text-align: center; width: 100px;">
+                            <img src="{{ champion.image }}" alt="{{ champion.name }}" style="width: 80px; height: 80px; display: block; margin-left: auto; margin-right: auto;"/>
+                            <h4 style="font-size: 12px; margin-top: 5px; margin-bottom: 0; height: 20px; line-height: 20px;">{{ champion.name }}</h4>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+          </div>
+          <!-- 로테이션 끝 -->
+
+          <!-- 로테이션 끝 -->
+           
+          <!-- 로테이션 -->
+          <div class="most-popular">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-3 col-sm-6">
                     <div class="heading-section">
                         <h4><em>Current</em> Champion Rotation</h4>
                     </div>
                     <div class="item">
                         {% for champion in champions %}
-                            <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-4">
+                            <div class="item col-lg-2 col-md-3 col-sm-4 col-6 mb-4">
                                     <img src="{{ champion.image }}" alt="{{ champion.name }}" style="width: 80px; height: 80px;"/>
                                     <h4>{{ champion.name }}</h4>
                             </div>
-                            {% comment %} {% if forloop.counter|divisibleby:5 and not forloop.last %}
+                            {% if forloop.counter|divisibleby:1 and not forloop.last %}
                                 </div><div class="row">
-                            {% endif %} {% endcomment %}
+                            {% endif %}
                         {% endfor %}
                     </div>
                 </div>
