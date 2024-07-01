@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .utils import get_champion_rotation, get_champion_data, map_champion_id_to_name
 from .models import Match
+from itertools import groupby
+from datetime import datetime
 
 # 홈 화면 뷰
 def home_view(request):
@@ -21,7 +23,19 @@ def home_view(request):
     return render(request, 'riot_app/home.html', {'champions': []})
 
 def match_list(request):
-    matches = Match.objects.all()
-    return render(request, 'riot_app/match_list.html', {'matches': matches})
+    # 7월 데이터 필터링
+    matches = Match.objects.filter(match_date__startswith='07').order_by('match_date', 'match_time')
+    
+    grouped_matches = []
+    for date, group in groupby(matches, key=lambda x: x.match_date):
+        grouped_matches.append({
+            'date': date,
+            'matches': list(group)
+        })
+    
+    context = {
+        'grouped_matches': grouped_matches
+    }
+    return render(request, 'riot_app/match_list.html', context)
 
 

@@ -60,7 +60,7 @@
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
                         <li><a href="index.html" class="active">Home</a></li>
-                        <li><a href="browse.html">Browse</a></li>
+                        <li><a href="{% url 'match_list' %}">경기일정</a></li>
                         <li><a href="details.html">Details</a></li>
                         <li><a href="streams.html">Streams</a></li>
                         <li><a href="profile.html">Profile <img src="{% static 'assets/images/profile-header.jpg' %}" alt=""></a></li>
@@ -84,35 +84,7 @@
           <!-- 메인 배너 -->
           <div class="main-banner"></div>
           <!-- 메인 배너 끝 -->
-
-          <!-- LCK 경기 일정 -->
-          <h1>Match List</h1>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Date</th>
-                <th>Time</th>
-                <th>Team A</th>
-                <th>Team A Logo</th>
-                <th>Team B</th>
-                <th>Team B Logo</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for match in matches %}
-            <tr>
-                <td>{{ match.match_date }}</td>
-                <td>{{ match.match_time }}</td>
-                <td>{{ match.team_a_name }}</td>
-                <td><img src="{{ match.team_a_logo }}" alt="{{ match.team_a_name }} Logo" width="50"></td>
-                <td>{{ match.team_b_name }}</td>
-                <td><img src="{{ match.team_b_logo }}" alt="{{ match.team_b_name }} Logo" width="50"></td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-          <!-- LCK 경기 일정 끝 -->
-
+          
           <!-- 로테이션 -->
           <div class="most-popular">
             <div class="heading-section">
