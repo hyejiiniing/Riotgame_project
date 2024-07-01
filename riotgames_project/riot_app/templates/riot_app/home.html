@@ -86,20 +86,31 @@
           <!-- 메인 배너 끝 -->
 
           <!-- LCK 경기 일정 -->
-          <div class="lck-schedule">
-            <div class="heading-section">
-                <h4><em>Upcoming</em> LCK Matches</h4>
-            </div>
-            {% if message %}
-                <p>{{ message }}</p>
-            {% else %}
-                <ul>
-                    {% for match in schedule %}
-                        <li>{{ match.date }}: {{ match.team1 }} vs {{ match.team2 }}</li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
-          </div>
+          <h1>Match List</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Team A</th>
+                <th>Team A Logo</th>
+                <th>Team B</th>
+                <th>Team B Logo</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for match in matches %}
+            <tr>
+                <td>{{ match.match_date }}</td>
+                <td>{{ match.match_time }}</td>
+                <td>{{ match.team_a_name }}</td>
+                <td><img src="{{ match.team_a_logo }}" alt="{{ match.team_a_name }} Logo" width="50"></td>
+                <td>{{ match.team_b_name }}</td>
+                <td><img src="{{ match.team_b_logo }}" alt="{{ match.team_b_name }} Logo" width="50"></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
           <!-- LCK 경기 일정 끝 -->
 
           <!-- 로테이션 -->

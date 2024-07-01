@@ -1,16 +1,35 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>LCK 경기 일정</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Match List</title>
 </head>
 <body>
-    <h1>LCK 경기 일정</h1>
-    <div class="d_flex flex_column pt_24 md">
-        <span class="event-time">2024-07-01</span>
-        <span class="team-1">Team A</span>
-        <span class="team-2">Team B</span>
-        <img class="obj-fit_contain obj-pos_center" src="https://example.com/logo.jpg" />
-    </div>
+    <h1>Match List</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Team A</th>
+                <th>Team A Logo</th>
+                <th>Team B</th>
+                <th>Team B Logo</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for match in matches %}
+            <tr>
+                <td>{{ match.match_date }}</td>
+                <td>{{ match.match_time }}</td>
+                <td>{{ match.team_a_name }}</td>
+                <td><img src="{{ match.team_a_logo }}" alt="{{ match.team_a_name }} Logo" width="50"></td>
+                <td>{{ match.team_b_name }}</td>
+                <td><img src="{{ match.team_b_logo }}" alt="{{ match.team_b_name }} Logo" width="50"></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </body>
 </html>
