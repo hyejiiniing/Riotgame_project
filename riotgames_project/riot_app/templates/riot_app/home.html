@@ -85,6 +85,23 @@
           <div class="main-banner"></div>
           <!-- 메인 배너 끝 -->
 
+          <!-- LCK 경기 일정 -->
+          <div class="lck-schedule">
+            <div class="heading-section">
+                <h4><em>Upcoming</em> LCK Matches</h4>
+            </div>
+            {% if message %}
+                <p>{{ message }}</p>
+            {% else %}
+                <ul>
+                    {% for match in schedule %}
+                        <li>{{ match.date }}: {{ match.team1 }} vs {{ match.team2 }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+          </div>
+          <!-- LCK 경기 일정 끝 -->
+
           <!-- 로테이션 -->
           <div class="most-popular">
             <div class="heading-section">
@@ -98,31 +115,6 @@
                             <h4 style="font-size: 12px; margin-top: 5px; margin-bottom: 0; height: 20px; line-height: 20px;">{{ champion.name }}</h4>
                         </div>
                     {% endfor %}
-                </div>
-            </div>
-          </div>
-          <!-- 로테이션 끝 -->
-
-          <!-- 로테이션 끝 -->
-           
-          <!-- 로테이션 -->
-          <div class="most-popular">
-            <div class="row">
-                <div class="col-lg-3 col-sm-6">
-                    <div class="heading-section">
-                        <h4><em>Current</em> Champion Rotation</h4>
-                    </div>
-                    <div class="item">
-                        {% for champion in champions %}
-                            <div class="item col-lg-2 col-md-3 col-sm-4 col-6 mb-4">
-                                    <img src="{{ champion.image }}" alt="{{ champion.name }}" style="width: 80px; height: 80px;"/>
-                                    <h4>{{ champion.name }}</h4>
-                            </div>
-                            {% if forloop.counter|divisibleby:1 and not forloop.last %}
-                                </div><div class="row">
-                            {% endif %}
-                        {% endfor %}
-                    </div>
                 </div>
             </div>
           </div>

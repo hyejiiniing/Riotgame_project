@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
+import pymysql
+pymysql.install_as_MySQLdb()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -75,12 +77,15 @@ WSGI_APPLICATION = "riotgames_project.wsgi.application"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+    "default":{
+        "ENGINE":"django.db.backends.mysql",
+        "NAME":"lol_db", # 접속할 DB명
+        "USER":"root", # 접속 계정명
+        "PASSWORD":"hyejiining", # 암호
+        "HOST":"localhost", # 127.0.0.1
+        "PORT":"3306", # 접속  포트 번호
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators

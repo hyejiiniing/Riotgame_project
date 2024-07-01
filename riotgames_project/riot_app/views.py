@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .utils import get_champion_rotation, get_champion_data, map_champion_id_to_name
+from .models import Match
 
 # 홈 화면 뷰
 def home_view(request):
@@ -18,3 +19,9 @@ def home_view(request):
                 })
         return render(request, 'riot_app/home.html', {'champions': champions})
     return render(request, 'riot_app/home.html', {'champions': []})
+
+def match_list(request):
+    matches = Match.objects.all()
+    return render(request, 'riot_app/match_list.html', {'matches': matches})
+
+
