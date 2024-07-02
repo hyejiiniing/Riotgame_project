@@ -18,7 +18,56 @@
     <link rel="stylesheet" href="{% static 'assets/css/templatemo-cyborg-gaming.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/owl.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/animate.css' %}">
-    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+
+    <style>
+      .champion-row {
+          display: flex;
+          justify-content: center;
+          margin-bottom: 20px;
+      }
+      
+      .champion-item {
+          margin: 10px;
+          text-align: center;
+          width: 100px;
+      }
+      
+      .champion-item img {
+          width: 80px;
+          height: 80px;
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+      }
+      
+      .champion-item h4 {
+          font-size: 12px;
+          margin-top: 5px;
+          margin-bottom: 0;
+          height: 20px;
+          line-height: 20px;
+      }
+      .slideshow-container {
+        position: relative;
+        width: 100%;
+        height: 380px; /* 슬라이드 높이를 고정 */
+        border-radius: 23px;
+        overflow: hidden;
+      }
+      
+      .slideshow-slide {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        transition: opacity 1s ease-in-out;
+      }
+      
+      .slideshow-slide.hidden {
+        opacity: 0;
+      }
+    </style>
 </head>
 
 <body>
@@ -42,7 +91,7 @@
   <header class="header-area header-sticky">
     <div class="container">
         <div class="row">
-            <div class="col-12">
+            <div class="col-lg-12">
                 <nav class="main-nav">
                     <!-- ***** Logo Start ***** -->
                     <a href="index.html" class="logo">
@@ -63,7 +112,7 @@
                         <li><a href="{% url 'match_list' %}">경기일정</a></li>
                         <li><a href="details.html">Details</a></li>
                         <li><a href="streams.html">Streams</a></li>
-                        <li><a href="profile.html">Profile <img src="{% static 'assets/images/profile-header.jpg' %}" alt=""></a></li>
+                        <li><a href="profile.html">프로필 <img src="{% static 'assets/images/profile-header.jpg' %}" alt=""></a></li>
                     </ul>   
                     <a class='menu-trigger'>
                         <span>Menu</span>
@@ -82,25 +131,48 @@
         <div class="page-content">
 
           <!-- 메인 배너 -->
-          <div class="main-banner"></div>
+          <div class="slideshow-container">
+            <div class="slideshow-slide" style="background-image: url('{% static 'assets/images/main.webp' %}');"></div>
+            <div class="slideshow-slide hidden" style="background-image: url('{% static 'assets/images/slide3.webp' %}');"></div>
+            <div class="slideshow-slide hidden" style="background-image: url('{% static 'assets/images/slide4.webp' %}');"></div>
+          </div>
           <!-- 메인 배너 끝 -->
-          
+
           <!-- 로테이션 -->
           <div class="most-popular">
-            <div class="heading-section">
-                <h4><em>Current</em> Champion Rotation</h4>
-            </div>
-            <div class="item">
-                <div style="display: flex; flex-wrap: wrap; justify-content: center;">
-                    {% for champion in champions %}
-                        <div style="margin: 10px; text-align: center; width: 100px;">
-                            <img src="{{ champion.image }}" alt="{{ champion.name }}" style="width: 80px; height: 80px; display: block; margin-left: auto; margin-right: auto;"/>
-                            <h4 style="font-size: 12px; margin-top: 5px; margin-bottom: 0; height: 20px; line-height: 20px;">{{ champion.name }}</h4>
-                        </div>
-                    {% endfor %}
+    <div class="heading-section">
+        <h4><em>Current</em> Champion Rotation</h4>
+    </div>
+    <div class="item">
+        <!-- 첫 번째 행: 7개 -->
+        <div class="champion-row">
+            {% for champion in champions|slice:":7" %}
+                <div class="champion-item">
+                    <img src="{{ champion.image }}" alt="{{ champion.name }}" />
+                    <h4>{{ champion.name }}</h4>
                 </div>
-            </div>
-          </div>
+            {% endfor %}
+        </div>
+        <!-- 두 번째 행: 7개 -->
+        <div class="champion-row">
+            {% for champion in champions|slice:"7:14" %}
+                <div class="champion-item">
+                    <img src="{{ champion.image }}" alt="{{ champion.name }}" />
+                    <h4>{{ champion.name }}</h4>
+                </div>
+            {% endfor %}
+        </div>
+        <!-- 세 번째 행: 5개 -->
+        <div class="champion-row">
+            {% for champion in champions|slice:"14:19" %}
+                <div class="champion-item">
+                    <img src="{{ champion.image }}" alt="{{ champion.name }}" />
+                    <h4>{{ champion.name }}</h4>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
           <!-- 로테이션 끝 -->
 
           <!-- ***** Gaming Library Start ***** -->
@@ -164,8 +236,26 @@
     </div>
   </footer>
 
-
   <!-- Scripts -->
+  <script>
+    var slideIndex = 0;
+    var slides = document.getElementsByClassName("slideshow-slide");
+
+    function showSlides() {
+      for (var i = 0; i < slides.length; i++) {
+        slides[i].classList.add("hidden");
+      }
+      slideIndex++;
+      if (slideIndex > slides.length) {
+        slideIndex = 1;
+      }
+      slides[slideIndex - 1].classList.remove("hidden");
+      setTimeout(showSlides, 4000); // 5초마다 슬라이드 전환
+    }
+
+    showSlides();
+  </script>
+
   <!-- Bootstrap core JavaScript -->
   <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
   <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
@@ -176,7 +266,5 @@
   <script src="{% static 'assets/js/popup.js' %}"></script>
   <script src="{% static 'assets/js/custom.js' %}"></script>
 
-
 </body>
-
 </html>
