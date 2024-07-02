@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from .utils import get_champion_rotation, get_champion_data, map_champion_id_to_name
 from .models import Match
@@ -9,6 +9,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from .serializers import MatchSerializer
 from rest_framework import viewsets
+from model_champion.models import Champion 
+import logging
 
 # 홈 화면 뷰
 def home_view(request):
@@ -52,11 +54,11 @@ def match_list_api(request, month):
 
 def champion_list(request):
     champions = Champion.objects.all()
-    return render(request, 'champion_list.html', {'champions': champions})
+    return render(request, 'riot_app/champion_list.html', {'champions': champions})
 
 def champion_detail(request, champion_id):
     champion = get_object_or_404(Champion, id=champion_id)
-    return render(request, 'champion_detail.html', {'champion': champion})
+    return render(request, 'riot_app/champion_detail.html', {'champion': champion})
 
 
 # # lck 순위

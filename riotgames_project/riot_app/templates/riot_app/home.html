@@ -138,7 +138,7 @@
           </div>
           <!-- 메인 배너 끝 -->
 
-          <ul>
+          {% comment %} <ul>
             {% for champion in champions %}
                 <li> 
                     <a href="{% url 'champion_detail' champion.name %}">
@@ -147,7 +147,7 @@
                     </a>
                 </li>
             {% endfor %}
-        </ul>
+        </ul> {% endcomment %}
 
 
            <!-- ***** Featured Games Start ***** -->
