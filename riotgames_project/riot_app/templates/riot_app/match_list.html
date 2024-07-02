@@ -71,6 +71,10 @@ https://templatemo.com/tm-579-cyborg-gaming
   .team-right {
       justify-content: flex-end;
   }
+  .main-button a.selected {
+    background-color: #fff;
+    color: #e75e8d;
+}
 </style>
   </head>
 
@@ -134,17 +138,17 @@ https://templatemo.com/tm-579-cyborg-gaming
 
           <!-- 경기일정 -->
           <div class="most-popular">
+            <div class="main-button">
+              <a onclick="loadMatches('01')">1월</a>
+              <a onclick="loadMatches('02')">2월</a>
+              <a onclick="loadMatches('03')">3월</a>
+              <a onclick="loadMatches('04')">4월</a>
+              <a onclick="loadMatches('06')">6월</a>
+              <a onclick="loadMatches('07')">7월</a>
+              <a onclick="loadMatches('08')">8월</a>
+          </div>
             <div class="heading-section">
-                <h4><em>Match</em> List</h4>
-                <div class="main-button">
-                  <a onclick="loadMatches('01')">1월</a>
-                  <a onclick="loadMatches('02')">2월</a>
-                  <a onclick="loadMatches('03')">3월</a>
-                  <a onclick="loadMatches('04')">4월</a>
-                  <a onclick="loadMatches('06')">6월</a>
-                  <a onclick="loadMatches('07')">7월</a>
-                  <a onclick="loadMatches('08')">8월</a>
-              </div>
+                <h4><em>Match</em> List</h4> 
             </div>
             <div id="match-container">
             <div class="item">
@@ -245,6 +249,11 @@ https://templatemo.com/tm-579-cyborg-gaming
                     });
                     container.appendChild(itemDiv);
                 });
+
+                // 선택된 버튼 강조
+            const buttons = document.querySelectorAll('.main-button a');
+            buttons.forEach(button => button.classList.remove('selected'));
+            document.querySelector(`.main-button a[onclick="loadMatches('${month}')"]`).classList.add('selected');
             });
     }
 
