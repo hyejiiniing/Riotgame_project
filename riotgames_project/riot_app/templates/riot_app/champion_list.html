@@ -8,7 +8,10 @@
     <ul>
         {% for champion in champions %}
             <li>
-                <a href="{% url 'champion_detail' champion.id %}">{{ champion.name }}</a>
+                <a href="{% url 'champion_detail' champion.id %}">
+                    <img src="{{ champion.image }}" alt="{{ champion.name }} image" style="width: 50px; height: 50px;">
+                    {{ champion.name }}
+                </a>
             </li>
         {% endfor %}
     </ul>

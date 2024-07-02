@@ -12,6 +12,8 @@ from rest_framework import viewsets
 from model_champion.models import Champion 
 import logging
 
+logger = logging.getLogger(__name__)
+
 # 홈 화면 뷰
 def home_view(request):
     rotation_data = get_champion_rotation()
@@ -54,16 +56,19 @@ def match_list_api(request, month):
 
 def champion_list(request):
     champions = Champion.objects.all()
-    return render(request, 'riot_app/champion_list.html', {'champions': champions})
+    champions_data = []
+    for champion in champions:
+        champion_name_url = champion.name.replace(" ", "").replace("'", "").replace(".", "").replace("&", "")
+        image_url = f"http://ddragon.leagueoflegends.com/cdn/11.24.1/img/champion/{champion_name_url}.png"
+        logger.info(f"Image URL for {champion.name}: {image_url}")
+        champion_data = {
+            'id': champion.id,
+            'name': champion.name,
+            'image': image_url
+        }
+        champions_data.append(champion_data)
+    return render(request, 'riot_app/champion_list.html', {'champions': champions_data})
 
 def champion_detail(request, champion_id):
     champion = get_object_or_404(Champion, id=champion_id)
     return render(request, 'riot_app/champion_detail.html', {'champion': champion})
-
-
-# # lck 순위
-# def lck_rankings_view(request):
-#     team_rankings = TeamRanking.objects.all().order_by('-points')  # 포인트 기준으로 내림차순 정렬
-#     return render(request, 'lck_rankings.html', {'team_rankings': team_rankings})
-
-
