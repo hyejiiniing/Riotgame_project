@@ -4,6 +4,10 @@ from .utils import get_champion_rotation, get_champion_data, map_champion_id_to_
 from .models import Match
 from itertools import groupby
 from datetime import datetime
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
+from .serializers import MatchSerializer
 
 # 홈 화면 뷰
 def home_view(request):
@@ -23,7 +27,7 @@ def home_view(request):
     return render(request, 'riot_app/home.html', {'champions': []})
 
 def match_list(request):
-    # 7월 데이터 필터링
+    # 기본 7월 데이터 필터링
     matches = Match.objects.filter(match_date__startswith='07').order_by('match_date', 'match_time')
     
     grouped_matches = []
@@ -34,8 +38,15 @@ def match_list(request):
         })
     
     context = {
-        'grouped_matches': grouped_matches
+        'grouped_matches': grouped_matches,
+        'selected_month': '07'
     }
     return render(request, 'riot_app/match_list.html', context)
+
+@api_view(['GET'])
+def match_list_api(request, month):
+    matches = Match.objects.filter(match_date__startswith=month).order_by('match_date', 'match_time')
+    serializer = MatchSerializer(matches, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
 
 

@@ -136,7 +136,17 @@ https://templatemo.com/tm-579-cyborg-gaming
           <div class="most-popular">
             <div class="heading-section">
                 <h4><em>Match</em> List</h4>
+                <div class="main-button">
+                  <a onclick="loadMatches('01')">1월</a>
+                  <a onclick="loadMatches('02')">2월</a>
+                  <a onclick="loadMatches('03')">3월</a>
+                  <a onclick="loadMatches('04')">4월</a>
+                  <a onclick="loadMatches('06')">6월</a>
+                  <a onclick="loadMatches('07')">7월</a>
+                  <a onclick="loadMatches('08')">8월</a>
+              </div>
             </div>
+            <div id="match-container">
             <div class="item">
                 {% for group in grouped_matches %}
                 <h4>{{ group.date }}</h4>
@@ -157,6 +167,7 @@ https://templatemo.com/tm-579-cyborg-gaming
                 </div>
                 {% endfor %}
             </div>
+          </div>
         </div>
         
           <!-- 경기일정 끝 -->
@@ -180,6 +191,81 @@ https://templatemo.com/tm-579-cyborg-gaming
 
 
   <!-- Scripts -->
+  <script>
+    function loadMatches(month) {
+        fetch(`/api/matches/${month}/`)
+            .then(response => response.json())
+            .then(data => {
+                const container = document.getElementById('match-container');
+                container.innerHTML = '';
+                let groupedMatches = groupByDate(data);
+                groupedMatches.forEach(group => {
+                    let itemDiv = document.createElement('div');
+                    itemDiv.classList.add('item');
+                    let dateHeader = document.createElement('h4');
+                    dateHeader.innerText = group.date;
+                    itemDiv.appendChild(dateHeader);
+                    group.matches.forEach(match => {
+                        let matchCard = document.createElement('div');
+                        matchCard.classList.add('match-card');
+
+                        let teamADiv = document.createElement('div');
+                        teamADiv.classList.add('team');
+                        let teamALogo = document.createElement('img');
+                        teamALogo.src = match.team_a_logo;
+                        teamALogo.alt = `${match.team_a_name} Logo`;
+                        teamALogo.classList.add('team-logo');
+                        let teamAName = document.createElement('div');
+                        teamAName.classList.add('team-name');
+                        teamAName.innerText = match.team_a_name;
+                        teamADiv.appendChild(teamALogo);
+                        teamADiv.appendChild(teamAName);
+
+                        let vsDiv = document.createElement('div');
+                        vsDiv.classList.add('vs');
+                        vsDiv.innerText = 'vs';
+
+                        let teamBDiv = document.createElement('div');
+                        teamBDiv.classList.add('team');
+                        let teamBLogo = document.createElement('img');
+                        teamBLogo.src = match.team_b_logo;
+                        teamBLogo.alt = `${match.team_b_name} Logo`;
+                        teamBLogo.classList.add('team-logo');
+                        let teamBName = document.createElement('div');
+                        teamBName.classList.add('team-name');
+                        teamBName.innerText = match.team_b_name;
+                        teamBDiv.appendChild(teamBLogo);
+                        teamBDiv.appendChild(teamBName);
+
+                        matchCard.appendChild(teamADiv);
+                        matchCard.appendChild(vsDiv);
+                        matchCard.appendChild(teamBDiv);
+
+                        itemDiv.appendChild(matchCard);
+                    });
+                    container.appendChild(itemDiv);
+                });
+            });
+    }
+
+    function groupByDate(matches) {
+        let grouped = [];
+        matches.forEach(match => {
+            let date = match.match_date;
+            let group = grouped.find(g => g.date === date);
+            if (!group) {
+                group = { date: date, matches: [] };
+                grouped.push(group);
+            }
+            group.matches.push(match);
+        });
+        return grouped;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        loadMatches('07'); // 기본 7월 데이터 로드
+    });
+</script>
   <!-- Bootstrap core JavaScript -->
   <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
   <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
