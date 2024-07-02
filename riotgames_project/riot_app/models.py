@@ -11,3 +11,18 @@ class Match(models.Model):
 
     def __str__(self):
         return f"{self.team_a_name} vs {self.team_b_name} on {self.match_date} at {self.match_time}"
+
+# lck 순위
+# class TeamRanking(models.Model):
+#     team_logo = models.URLField()
+#     team_name = models.CharField(max_length=100)
+#     wins = models.IntegerField()
+#     losses = models.IntegerField()
+#     points = models.IntegerField()
+#     rank = models.IntegerField(default=0)
+#     season = models.CharField(max_length=100, default='2024 LCK 서머')
+#     win_rate = models.FloatField(default=0.0) 
+#     kda = models.FloatField(default=0.0)       
+#     kills = models.IntegerField(default=0)    
+#     deaths = models.IntegerField(default=0)    
+#     assists = models.IntegerField(default=0)   

@@ -30,23 +30,83 @@ def map_champion_id_to_name(champion_data):
     return id_to_name
 
 
-def get_lck_schedule():
-    url = 'https://lolesports.com/ko-KR/schedule?leagues=lck'
-    response = requests.get(url)
-    soup = BeautifulSoup(response.content, 'html.parser')
+# def get_lck_schedule():
+#     url = 'https://lolesports.com/ko-KR/schedule?leagues=lck'
+#     response = requests.get(url)
+#     soup = BeautifulSoup(response.content, 'html.parser')
 
-    # 실제 HTML 구조에 맞게 데이터를 추출합니다.
-    schedule = []
+#     # 실제 HTML 구조에 맞게 데이터를 추출합니다.
+#     schedule = []
 
-    matches = soup.find_all('div', class_='EventMatch')  # 실제 HTML 구조에 맞는 클래스 이름 사용
-    for match in matches:
-        # 날짜 정보 추출
-        date_str = match.find('span', class_='EventMatch__date--1mdGh').text.strip()  # 클래스 이름 확인 및 수정
-        match_date = datetime.strptime(date_str, '%Y-%m-%dT%H:%M:%S')  # 날짜 형식 확인 및 수정
-        teams = match.find_all('span', class_='EventMatch__team--1jGd5')  # 클래스 이름 확인 및 수정
-        team1 = teams[0].text.strip()
-        team2 = teams[1].text.strip()
-        schedule.append({'date': match_date, 'team1': team1, 'team2': team2})
+#     matches = soup.find_all('div', class_='EventMatch')  # 실제 HTML 구조에 맞는 클래스 이름 사용
+#     for match in matches:
+#         # 날짜 정보 추출
+#         date_str = match.find('span', class_='EventMatch__date--1mdGh').text.strip()  # 클래스 이름 확인 및 수정
+#         match_date = datetime.strptime(date_str, '%Y-%m-%dT%H:%M:%S')  # 날짜 형식 확인 및 수정
+#         teams = match.find_all('span', class_='EventMatch__team--1jGd5')  # 클래스 이름 확인 및 수정
+#         team1 = teams[0].text.strip()
+#         team2 = teams[1].text.strip()
+#         schedule.append({'date': match_date, 'team1': team1, 'team2': team2})
 
-    # 다음 예정된 5개의 경기를 반환
-    return schedule[:5]
+#     # 다음 예정된 5개의 경기를 반환
+#     return schedule[:5]
+
+# # lck 순위
+# def crawl_lck_rankings():
+#     url = "https://game.naver.com/esports/League_of_Legends/record/lck/team/lck_2024_summer"
+#     response = requests.get(url)
+#     soup = BeautifulSoup(response.content, 'html.parser')
+
+#     rankings = []
+
+#     teams = soup.select('div.record_list_item__2fFsp')
+#     for team in teams:
+#         team_logo_style = team.select_one('.record_list_thumb_logo__1s1BT')['style']
+#         team_logo = team_logo_style.split('url("')[1].split('")')[0]
+#         team_name = team.select_one('.record_list_name__27huQ').text
+#         stats = team.select('.record_list_data__3wyY7')
+#         wins = stats[0].text.strip()
+#         losses = stats[1].text.strip()
+#         points = stats[2].text.strip()
+#         rank = team.select_one('.record_list_rank__3mn_o').text.strip()
+#         win_rate = stats[3].text.strip()
+#         kda = stats[4].text.strip()
+#         kills = stats[5].text.strip()
+#         deaths = stats[6].text.strip()
+#         assists = stats[7].text.strip()
+
+#         rankings.append({
+#             'rank': int(rank),
+#             'team_logo': team_logo,
+#             'team_name': team_name,
+#             'wins': int(wins),
+#             'losses': int(losses),
+#             'points': int(points),
+#             'win_rate': float(win_rate),
+#             'kda': float(kda),
+#             'kills': int(kills),
+#             'deaths': int(deaths),
+#             'assists': int(assists),
+#             'season': '2024 LCK 서머'
+#         })
+    
+#     return rankings
+
+# def update_rankings():
+#     data = crawl_lck_rankings()
+#     TeamRanking.objects.all().delete()
+#     for team in data:
+#         TeamRanking.objects.create(
+#             rank=team['rank'],
+#             team_logo=team['team_logo'],
+#             team_name=team['team_name'],
+#             wins=team['wins'],
+#             losses=team['losses'],
+#             points=team['points'],
+#             win_rate=team['win_rate'],
+#             kda=team['kda'],
+#             kills=team['kills'],
+#             deaths=team['deaths'],
+#             assists=team['assists'],
+#             season=team['season']
+#         )

@@ -138,6 +138,18 @@
           </div>
           <!-- 메인 배너 끝 -->
 
+          <ul>
+            {% for champion in champions %}
+                <li> 
+                    <a href="{% url 'champion_detail' champion.name %}">
+                        <img src="{{ champion.image }}" alt="{{ champion.name }}">
+                        {{ champion.name }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+
+
            <!-- ***** Featured Games Start ***** -->
             <!-- ***** Live Stream Start ***** -->
           <div class="live-stream">

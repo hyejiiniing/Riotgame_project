@@ -8,6 +8,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from .serializers import MatchSerializer
+from rest_framework import viewsets
 
 # 홈 화면 뷰
 def home_view(request):
@@ -48,5 +49,19 @@ def match_list_api(request, month):
     matches = Match.objects.filter(match_date__startswith=month).order_by('match_date', 'match_time')
     serializer = MatchSerializer(matches, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+def champion_list(request):
+    champions = Champion.objects.all()
+    return render(request, 'champion_list.html', {'champions': champions})
+
+def champion_detail(request, champion_id):
+    champion = get_object_or_404(Champion, id=champion_id)
+    return render(request, 'champion_detail.html', {'champion': champion})
+
+
+# # lck 순위
+# def lck_rankings_view(request):
+#     team_rankings = TeamRanking.objects.all().order_by('-points')  # 포인트 기준으로 내림차순 정렬
+#     return render(request, 'lck_rankings.html', {'team_rankings': team_rankings})
 
 

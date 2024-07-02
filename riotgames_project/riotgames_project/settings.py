@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     'riot_app',
     'rest_framework',
+    'model_champion',
 ]
 
 MIDDLEWARE = [
@@ -133,4 +134,4 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-RIOT_API_KEY = os.getenv('RIOT_API_KEY', 'RGAPI-e819ebc5-4eac-46ec-822b-8948c3dde490')
+RIOT_API_KEY = os.getenv('RIOT_API_KEY', 'RGAPI-d3693254-03e3-4d24-8504-94a41f0d0469')

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ champion.name }} Details</title>
+</head>
+<body>
+    <h1>{{ champion.name }} Details</h1>
+    <p><strong>Title:</strong> {{ champion.title }}</p>
+    <p><strong>Lore:</strong> {{ champion.lore }}</p>
+    <p><strong>Blurb:</strong> {{ champion.blurb }}</p>
+    <p><strong>Tags:</strong> {{ champion.tags }}</p>
+    <p><strong>Partype:</strong> {{ champion.partype }}</p>
+    <p><strong>Ally Tips:</strong> {{ champion.allytips }}</p>
+    <p><strong>Enemy Tips:</strong> {{ champion.enemytips }}</p>
+
+    <h2>Champion Stats</h2>
+    <p><strong>HP:</strong> {{ champion.championstat.hp }}</p>
+    <p><strong>HP per level:</strong> {{ champion.championstat.hpperlevel }}</p>
+    <p><strong>MP:</strong> {{ champion.championstat.mp }}</p>
+    <p><strong>MP per level:</strong> {{ champion.championstat.mpperlevel }}</p>
+    <p><strong>Move Speed:</strong> {{ champion.championstat.movespeed }}</p>
+    <p><strong>Armor:</strong> {{ champion.championstat.armor }}</p>
+    <p><strong>Armor per level:</strong> {{ champion.championstat.armorperlevel }}</p>
+    <p><strong>Spell Block:</strong> {{ champion.championstat.spellblock }}</p>
+    <p><strong>Spell Block per level:</strong> {{ champion.championstat.spellblockperlevel }}</p>
+    <p><strong>Attack Range:</strong> {{ champion.championstat.attackrange }}</p>
+    <p><strong>HP Regen:</strong> {{ champion.championstat.hpregen }}</p>
+    <p><strong>HP Regen per level:</strong> {{ champion.championstat.hpregenperlevel }}</p>
+    <p><strong>MP Regen:</strong> {{ champion.championstat.mpregen }}</p>
+    <p><strong>MP Regen per level:</strong> {{ champion.championstat.mpregenperlevel }}</p>
+    <p><strong>Crit:</strong> {{ champion.championstat.crit }}</p>
+    <p><strong>Crit per level:</strong> {{ champion.championstat.critperlevel }}</p>
+    <p><strong>Attack Damage:</strong> {{ champion.championstat.attackdamage }}</p>
+    <p><strong>Attack Damage per level:</strong> {{ champion.championstat.attackdamageperlevel }}</p>
+    <p><strong>Attack Speed per level:</strong> {{ champion.championstat.attackspeedperlevel }}</p>
+    <p><strong>Attack Speed:</strong> {{ champion.championstat.attackspeed }}</p>
+
+    <h2>Champion Spells</h2>
+    <ul>
+        {% for spell in champion.championspell_set.all %}
+            <li>
+                <strong>{{ spell.name }}:</strong> {{ spell.description }}
+            </li>
+        {% endfor %}
+    </ul>
+
+    <h2>Passive</h2>
+    <p><strong>{{ champion.championpassive.name }}:</strong> {{ champion.championpassive.description }}</p>
+
+    <h2>Skins</h2>
+    <ul>
+        {% for skin in champion.championskin_set.all %}
+            <li>
+                <strong>{{ skin.name }}</strong> (Chromas: {{ skin.chromas }})
+            </li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'champion_list' %}">Back to Champion List</a>
+</body>
+</html>

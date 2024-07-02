@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LCK Rankings</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">LCK Rankings</h1>
+
+        <h2 class="mt-5">Today's Game</h2>
+        <div id="today-game">
+            {% if today_game %}
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ today_game.date }}</h5>
+                        <p class="card-text">Teams: 
+                            {% for team in today_game.teams.all %}
+                                {{ team.name }}{% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                        </p>
+                    </div>
+                </div>
+            {% else %}
+                <p>No game today.</p>
+            {% endif %}
+        </div>
+
+        <h2 class="mt-5">Team Rankings</h2>
+        <div id="team-rankings" class="mt-3">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Team</th>
+                        <th>Wins</th>
+                        <th>Losses</th>
+                        <th>Points</th>
+                        <th>Win Rate</th>
+                        <th>KDA</th>
+                        <th>Kills</th>
+                        <th>Deaths</th>
+                        <th>Assists</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for team in teams %}
+                        <tr>
+                            <td>{{ team.rank }}</td>
+                            <td>
+                                <img src="{{ team.logo_url }}" alt="{{ team.name }}" style="width: 50px; height: 50px;">
+                                {{ team.name }}
+                            </td>
+                            <td>{{ team.wins }}</td>
+                            <td>{{ team.losses }}</td>
+                            <td>{{ team.points }}</td>
+                            <td>{{ team.win_rate }}%</td>
+                            <td>{{ team.kda }}</td>
+                            <td>{{ team.kills }}</td>
+                            <td>{{ team.deaths }}</td>
+                            <td>{{ team.assists }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <h2 class="mt-5">Players</h2>
+        <div id="players" class="mt-3">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Team</th>
+                        <th>POG Points</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for player in players %}
+                        <tr>
+                            <td>{{ player.name }}</td>
+                            <td>{{ player.team.name }}</td>
+                            <td>{{ player.pog_points }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

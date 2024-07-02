@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Champion List</title>
+</head>
+<body>
+    <h1>Champion List</h1>
+    <ul>
+        {% for champion in champions %}
+            <li>
+                <a href="{% url 'champion_detail' champion.id %}">{{ champion.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

@@ -1,5 +1,12 @@
 import requests
+import time
 from bs4 import BeautifulSoup
+from django.core.management.base import BaseCommand
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
+
+
 
 def crawl_schedule():
     url = 'https://game.naver.com/esports/League_of_Legends/schedule/lck'
@@ -62,3 +69,79 @@ def crawl_schedule():
 
 if __name__ == "__main__":
     crawl_schedule()
+
+# class Command(BaseCommand):
+#     help = 'Crawl LCK team rankings and update the database'
+
+#     def handle(self, *args, **kwargs):
+#         self.crawl_rankings()
+
+#     def crawl_rankings(self):
+#         chromedriver_path = '/usr/local/bin/chromedriver'  # 설치된 chromedriver 경로
+#         service = Service(chromedriver_path)
+#         options = webdriver.ChromeOptions()
+#         options.add_argument("--headless")
+#         options.add_argument("--no-sandbox")
+#         options.add_argument("--disable-dev-shm-usage")
+#         browser = webdriver.Chrome(service=service, options=options)
+
+#         url = 'https://game.naver.com/esports/League_of_Legends/record/lck/team/lck_2024_summer'
+#         browser.get(url)
+
+#         try:
+#             WebDriverWait(browser, 40).until(
+#                 EC.presence_of_all_elements_located((By.CSS_SELECTOR, 'div.record_list_item__2fFsp'))
+#             )
+#             soup = BeautifulSoup(browser.page_source, 'html.parser')
+            
+#             teams = soup.select('div.record_list_item__2fFsp')
+#             season = "2024 LCK 서머"
+
+#             if not teams:
+#                 self.stdout.write(self.style.ERROR('No teams found on the page.'))
+#                 return
+
+#             # Clear existing data
+#             TeamRanking.objects.all().delete()
+
+#             for team in teams:
+#                 try:
+#                     rank = team.select_one('span.record_list_rank__3mn_o').text.strip()
+#                     logo_style = team.select_one('span.record_list_thumb_logo__1s1BT')['style']
+#                     logo_url = logo_style.split('url("')[1].split('");')[0]
+#                     team_name = team.select_one('span.record_list_name__27huQ').text.strip()
+#                     stats = team.select('span.record_list_data__3wyY7')
+#                     wins = stats[0].text.strip()
+#                     losses = stats[1].text.strip()
+#                     points = stats[2].text.strip()
+#                     win_rate = stats[3].text.strip()
+#                     kda = stats[4].text.strip()
+#                     kills = stats[5].text.strip()
+#                     deaths = stats[6].text.strip()
+#                     assists = stats[7].text.strip()
+
+#                     # 디버깅 출력
+#                     print(f"Rank: {rank}, Season: {season}, Logo URL: {logo_url}, Team Name: {team_name}, Wins: {wins}, Losses: {losses}, Points: {points}, Win Rate: {win_rate}, KDA: {kda}, Kills: {kills}, Deaths: {deaths}, Assists: {assists}")
+
+#                     # Save data to database
+#                     TeamRanking.objects.create(
+#                         rank=int(rank),
+#                         season=season,
+#                         team_logo=logo_url,
+#                         team_name=team_name,
+#                         wins=int(wins),
+#                         losses=int(losses),
+#                         points=int(points),
+#                         win_rate=float(win_rate),
+#                         kda=float(kda),
+#                         kills=int(kills),
+#                         deaths=int(deaths),
+#                         assists=int(assists)
+#                     )
+#                 except Exception as e:
+#                     self.stdout.write(self.style.ERROR(f"Error processing team data: {e}"))
+
+#             self.stdout.write(self.style.SUCCESS('Successfully updated rankings'))
+        
+#         finally:
+#             browser.quit()
