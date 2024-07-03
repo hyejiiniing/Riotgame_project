@@ -50,9 +50,12 @@
       color: #fff;
     }
 
-    .text-content h1,
+    .text-content h1 {
+      margin-bottom: 30px;
+    }
     .text-content h2 {
-      color: #ec6090;
+      margin-top: 50px;
+      margin-bottom: 30px;
     }
 
     .text-content p {
@@ -85,9 +88,11 @@
       border-radius: 5px;
       transition: background-color 0.3s ease;
     }
-
-    .text-content a:hover {
-      background-color: #bf1d57;
+    .text-content .champion-details-text,
+    .text-content .spell-description {
+      color: #ddd;
+      font-size: 16px;
+      line-height: 1.5;
     }
   </style>
 
@@ -161,7 +166,7 @@
 
           <!-- ***** Champion Details Start ***** -->
           <div class="heading-section">
-            <h4><em>Champion</em> List</h4>
+            <h4><em>Champion</em> Detail</h4>
         </div>
           <div class="most-popular">
             <div class="row">
@@ -171,8 +176,8 @@
                   <h1>{{ champion.name }}</h1>
                   <p><strong>{{ champion.title }}</strong></p>
                   <p><strong>배경:</strong> {{ champion.lore }}</p>
-                  <p><strong>#:</strong> {{ champion.tags }}</p>
-                  <p><strong>Partype:</strong> {{ champion.partype }}</p>
+                  {% comment %} <p><strong>#:</strong> {{ champion.tags }}</p> {% endcomment %}
+                  {% comment %} <p><strong>Partype:</strong> {{ champion.partype }}</p> {% endcomment %}
                   <p><strong>Tips:</strong> {{ champion.allytips }}</p>
                   <p><strong>Enemy Tips:</strong> {{ champion.enemytips }}</p>
 
