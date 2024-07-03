@@ -174,11 +174,11 @@
                     <strong>{{ champion.championpassive.name }}:</strong> {{ champion.championpassive.description }}
                   </p>
 
-                  <h2>Skins</h2>
                   <ul>
-                    {% for skin in champion.championskin_set.all %}
+                    {% for skin_name, skin_image in skin_images.items %}
                     <li>
-                      <strong>{{ skin.name }}</strong> (Chromas: {{ skin.chromas }})
+                      <img src="{% static skin_image %}" alt="{{ skin_name }} image" class="skin-image">
+                      <strong>{{ skin_name }}</strong>
                     </li>
                     {% endfor %}
                   </ul>

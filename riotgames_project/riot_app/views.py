@@ -9,7 +9,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from .serializers import MatchSerializer
 from rest_framework import viewsets
-from model_champion.models import Champion 
+from model_champion.models import Champion, ChampionSkin
 import logging
 import os
 from django.conf import settings
@@ -75,6 +75,7 @@ def champion_detail(request, champion_id):
     champion = get_object_or_404(Champion, id=champion_id)
     passive_image = None
     skill_images = {'Q': None, 'W': None, 'E': None, 'R': None}
+    skin_images = {}
 
     # 패시브 이미지 폴더 경로
     passive_image_dir = os.path.join(settings.BASE_DIR, 'static/assets/images/passive')
@@ -93,9 +94,19 @@ def champion_detail(request, champion_id):
                 skill_images[spell_key] = os.path.join('assets/images/spell', filename)
                 break
 
+    # 스킨 이미지 파일 이름 찾기
+    splash_image_dir = os.path.join(settings.BASE_DIR, 'static/assets/images/splash')
+    skins = ChampionSkin.objects.filter(champion_id=champion_id)
+    for skin in skins:
+        for filename in os.listdir(splash_image_dir):
+            if filename.startswith(f"{champion_id}_{skin.num}"):
+                skin_images[skin.name] = os.path.join('assets/images/splash', filename)
+                break
+
     context = {
         'champion': champion,
         'passive_image': passive_image,
         'skill_images': skill_images,
+        'skin_images': skin_images,
     }
     return render(request, 'riot_app/champion_detail.html', context)
