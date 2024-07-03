@@ -1,5 +1,6 @@
 from django.db import models
 
+# Champion 기본 정보
 class Champion(models.Model):
     key = models.CharField(max_length=100)
     id = models.CharField(max_length=100, primary_key=True)
@@ -12,6 +13,7 @@ class Champion(models.Model):
     tags = models.CharField(max_length=100)
     partype = models.CharField(max_length=100)
 
+# ChampionImage
 class ChampionImage(models.Model):
     champion = models.OneToOneField(Champion, on_delete=models.CASCADE)
     full = models.CharField(max_length=100)
@@ -22,6 +24,7 @@ class ChampionImage(models.Model):
     W = models.IntegerField()
     h = models.IntegerField()
 
+# Champion 스킨
 class ChampionSkin(models.Model):
     champion = models.ForeignKey(Champion, on_delete=models.CASCADE)
     id = models.CharField(max_length=100, primary_key=True)
@@ -29,6 +32,7 @@ class ChampionSkin(models.Model):
     name = models.CharField(max_length=100)
     chromas = models.BooleanField()
 
+# Champion 수치 정보
 class ChampionInfo(models.Model):
     champion = models.OneToOneField(Champion, on_delete=models.CASCADE)
     attack = models.IntegerField()
@@ -36,6 +40,7 @@ class ChampionInfo(models.Model):
     magic = models.IntegerField()
     difficulty = models.IntegerField()
 
+# Champion 스탯
 class ChampionStat(models.Model):
     champion = models.OneToOneField(Champion, on_delete=models.CASCADE)
     hp = models.FloatField()
@@ -59,6 +64,7 @@ class ChampionStat(models.Model):
     attackspeedperlevel = models.FloatField()
     attackspeed = models.FloatField()
 
+# Champion 스킬
 class ChampionSpell(models.Model):
     champion = models.ForeignKey(Champion, on_delete=models.CASCADE)
     id = models.CharField(max_length=100, primary_key=True)
@@ -74,6 +80,7 @@ class ChampionSpell(models.Model):
     range = models.TextField()
     resource = models.CharField(max_length=100, blank=True)
 
+# Champion 스킬 이미지
 class SpellImage(models.Model):
     spell = models.OneToOneField(ChampionSpell, on_delete=models.CASCADE)
     full = models.CharField(max_length=100)
@@ -84,11 +91,13 @@ class SpellImage(models.Model):
     W = models.IntegerField()
     h = models.IntegerField()
 
+# Champion 패시브
 class ChampionPassive(models.Model):
     champion = models.OneToOneField(Champion, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     description = models.TextField()
 
+# Champion 패시브 이미지
 class PassiveImage(models.Model):
     passive = models.OneToOneField(ChampionPassive, on_delete=models.CASCADE)
     full = models.CharField(max_length=100)

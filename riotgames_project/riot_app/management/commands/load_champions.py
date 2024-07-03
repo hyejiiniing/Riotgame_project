@@ -8,6 +8,7 @@ from model_champion.models import Champion, ChampionImage, ChampionInfo, Champio
 def intListToStr(arr):
     return ",".join(map(str, arr))
 
+# 챔피언 데이터 데이터베이스에 저장
 def putChampions(json_file_path):
     with open(json_file_path, encoding='UTF-8') as f:
         data: Dict = json.load(f)['data']
