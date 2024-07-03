@@ -23,12 +23,71 @@
   <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
 
   <style>
+    .champion-details {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
     .champion-details img {
-      width: 150px;
-      height: 150px;
+      object-fit: cover;
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: 100%;
+      margin: 20px;
+      border-radius: 10px;
+      border: 2px solid #555;
+    }
+
+    .champion-details .text-content {
+      flex: 1;
+      max-width: 600px;
+      margin: 20px;
+      color: #fff;
+    }
+
+    .text-content h1,
+    .text-content h2 {
+      color: #ec6090;
+    }
+
+    .text-content p {
+      margin-bottom: 10px;
+    }
+
+    .passive-image {
+      width: 50px;
+      height: 50px;
       object-fit: cover;
       border-radius: 10%;
-      margin-bottom: 20px;
+      border: 2px solid #ec6090;
+    }
+
+    .page-content {
+      padding-top: 10px;
+    }
+
+    .most-popular {
+      margin-top: 10px;
+    }
+
+    .text-content a {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #ec6090;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .text-content a:hover {
+      background-color: #bf1d57;
     }
   </style>
 
@@ -64,7 +123,7 @@
           <nav class="main-nav">
             <!-- ***** Logo Start ***** -->
             <a href="index.html" class="logo">
-              <img src="{% static 'assets/images/logo.png' %}" alt="">
+              <img src="{% static 'assets/images/champion/logo.png' %}" alt="">
             </a>
             <!-- ***** Logo End ***** -->
             <!-- ***** Search End ***** -->
@@ -81,7 +140,7 @@
               <li><a href="browse.html" class="active">Browse</a></li>
               <li><a href="details.html">Details</a></li>
               <li><a href="streams.html">Streams</a></li>
-              <li><a href="profile.html">Profile <img src="{% static 'assets/images/profile-header.jpg' %}" alt=""></a></li>
+              <li><a href="profile.html">Profile <img src="{% static 'assets/images/champion/profile-header.jpg' %}" alt=""></a></li>
             </ul>
             <a class='menu-trigger'>
               <span>Menu</span>
@@ -101,66 +160,75 @@
         <div class="page-content">
 
           <!-- ***** Champion Details Start ***** -->
-          <div class="row">
-            <div class="col-lg-12 champion-details">
-              <img src="{% static 'assets/images/loading/' %}{{ champion.id }}_0.jpg" alt="{{ champion.name }} image">
-              <h1>{{ champion.name }} Details</h1>
-              <p><strong>Title:</strong> {{ champion.title }}</p>
-              <p><strong>Lore:</strong> {{ champion.lore }}</p>
-              <p><strong>Blurb:</strong> {{ champion.blurb }}</p>
-              <p><strong>Tags:</strong> {{ champion.tags }}</p>
-              <p><strong>Partype:</strong> {{ champion.partype }}</p>
-              <p><strong>Ally Tips:</strong> {{ champion.allytips }}</p>
-              <p><strong>Enemy Tips:</strong> {{ champion.enemytips }}</p>
+          <div class="heading-section">
+            <h4><em>Champion</em> List</h4>
+        </div>
+          <div class="most-popular">
+            <div class="row">
+              <div class="col-lg-12 champion-details">
+                <img src="{% static 'assets/images/loading/' %}{{ champion.id }}_0.jpg" alt="{{ champion.name }} image">
+                <div class="text-content">
+                  <h1>{{ champion.name }}</h1>
+                  <p><strong>{{ champion.title }}</strong></p>
+                  <p><strong>배경:</strong> {{ champion.lore }}</p>
+                  <p><strong>#:</strong> {{ champion.tags }}</p>
+                  <p><strong>Partype:</strong> {{ champion.partype }}</p>
+                  <p><strong>Tips:</strong> {{ champion.allytips }}</p>
+                  <p><strong>Enemy Tips:</strong> {{ champion.enemytips }}</p>
 
-              <h2>Champion Stats</h2>
-              <p><strong>HP:</strong> {{ champion.championstat.hp }}</p>
-              <p><strong>HP per level:</strong> {{ champion.championstat.hpperlevel }}</p>
-              <p><strong>MP:</strong> {{ champion.championstat.mp }}</p>
-              <p><strong>MP per level:</strong> {{ champion.championstat.mpperlevel }}</p>
-              <p><strong>Move Speed:</strong> {{ champion.championstat.movespeed }}</p>
-              <p><strong>Armor:</strong> {{ champion.championstat.armor }}</p>
-              <p><strong>Armor per level:</strong> {{ champion.championstat.armorperlevel }}</p>
-              <p><strong>Spell Block:</strong> {{ champion.championstat.spellblock }}</p>
-              <p><strong>Spell Block per level:</strong> {{ champion.championstat.spellblockperlevel }}</p>
-              <p><strong>Attack Range:</strong> {{ champion.championstat.attackrange }}</p>
-              <p><strong>HP Regen:</strong> {{ champion.championstat.hpregen }}</p>
-              <p><strong>HP Regen per level:</strong> {{ champion.championstat.hpregenperlevel }}</p>
-              <p><strong>MP Regen:</strong> {{ champion.championstat.mpregen }}</p>
-              <p><strong>MP Regen per level:</strong> {{ champion.championstat.mpregenperlevel }}</p>
-              <p><strong>Crit:</strong> {{ champion.championstat.crit }}</p>
-              <p><strong>Crit per level:</strong> {{ champion.championstat.critperlevel }}</p>
-              <p><strong>Attack Damage:</strong> {{ champion.championstat.attackdamage }}</p>
-              <p><strong>Attack Damage per level:</strong> {{ champion.championstat.attackdamageperlevel }}</p>
-              <p><strong>Attack Speed per level:</strong> {{ champion.championstat.attackspeedperlevel }}</p>
-              <p><strong>Attack Speed:</strong> {{ champion.championstat.attackspeed }}</p>
+                  <h2>Champion Stats</h2>
+                  <p><strong>HP:</strong> {{ champion.championstat.hp }}</p>
+                  <p><strong>HP per level:</strong> {{ champion.championstat.hpperlevel }}</p>
+                  <p><strong>MP:</strong> {{ champion.championstat.mp }}</p>
+                  <p><strong>MP per level:</strong> {{ champion.championstat.mpperlevel }}</p>
+                  <p><strong>Move Speed:</strong> {{ champion.championstat.movespeed }}</p>
+                  <p><strong>Armor:</strong> {{ champion.championstat.armor }}</p>
+                  <p><strong>Armor per level:</strong> {{ champion.championstat.armorperlevel }}</p>
+                  <p><strong>Spell Block:</strong> {{ champion.championstat.spellblock }}</p>
+                  <p><strong>Spell Block per level:</strong> {{ champion.championstat.spellblockperlevel }}</p>
+                  <p><strong>Attack Range:</strong> {{ champion.championstat.attackrange }}</p>
+                  <p><strong>HP Regen:</strong> {{ champion.championstat.hpregen }}</p>
+                  <p><strong>HP Regen per level:</strong> {{ champion.championstat.hpregenperlevel }}</p>
+                  <p><strong>MP Regen:</strong> {{ champion.championstat.mpregen }}</p>
+                  <p><strong>MP per level:</strong> {{ champion.championstat.mpperlevel }}</p>
+                  <p><strong>Crit:</strong> {{ champion.championstat.crit }}</p>
+                  <p><strong>Crit per level:</strong> {{ champion.championstat.critperlevel }}</p>
+                  <p><strong>Attack Damage:</strong> {{ champion.championstat.attackdamage }}</p>
+                  <p><strong>Attack Damage per level:</strong> {{ champion.championstat.attackdamageperlevel }}</p>
+                  <p><strong>Attack Speed per level:</strong> {{ champion.championstat.attackspeedperlevel }}</p>
+                  <p><strong>Attack Speed:</strong> {{ champion.championstat.attackspeed }}</p>
 
-              <h2>Champion Spells</h2>
-              <ul>
-                {% for spell in champion.championspell_set.all %}
-                <li>
-                  <strong>{{ spell.name }}:</strong> {{ spell.description }}
-                </li>
-                {% endfor %}
-              </ul>
+                  <h2>Champion Spells</h2>
+                  <ul>
+                    {% for spell in champion.championspell_set.all %}
+                    <li>
+                      <strong>{{ spell.name }}:</strong> {{ spell.description }}
+                    </li>
+                    {% endfor %}
+                  </ul>
 
-              <h2>Passive</h2>
-              <p><strong>{{ champion.championpassive.name }}:</strong> {{ champion.championpassive.description }}</p>
+                  <h2>Passive</h2>
+                  <p>
+                    <img src="{% static 'assets/images/loading/' %}{{ champion.id }}_{{ champion.championpassive.name|slugify }}.png" alt="{{ champion.championpassive.name }} image" class="passive-image">
+                    <strong>{{ champion.championpassive.name }}:</strong> {{ champion.championpassive.description }}
+                  </p>
 
-              <h2>Skins</h2>
-              <ul>
-                {% for skin in champion.championskin_set.all %}
-                <li>
-                  <strong>{{ skin.name }}</strong> (Chromas: {{ skin.chromas }})
-                </li>
-                {% endfor %}
-              </ul>
+                  <h2>Skins</h2>
+                  <ul>
+                    {% for skin in champion.championskin_set.all %}
+                    <li>
+                      <strong>{{ skin.name }}</strong> (Chromas: {{ skin.chromas }})
+                    </li>
+                    {% endfor %}
+                  </ul>
 
-              <a href="{% url 'champion_list' %}">Back to Champion List</a>
+                  <a href="{% url 'champion_list' %}">Back to Champion List</a>
+                </div>
+              </div>
             </div>
-          </div>
-          <!-- ***** Champion Details End ***** -->
+            <!-- ***** Champion Details End ***** -->
 
+          </div>
         </div>
       </div>
     </div>
@@ -182,7 +250,6 @@
   <!-- Bootstrap core JavaScript -->
   <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
   <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
-
   <script src="{% static 'assets/js/isotope.min.js' %}"></script>
   <script src="{% static 'assets/js/owl-carousel.js' %}"></script>
   <script src="{% static 'assets/js/tabs.js' %}"></script>
