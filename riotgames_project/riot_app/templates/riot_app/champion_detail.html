@@ -7,7 +7,7 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-  <title>Cyborg - Awesome HTML5 Template</title>
+  <title>champion_detail</title>
 
   <!-- Load static files -->
   {% load static %}
@@ -111,7 +111,7 @@
 
           <!-- ***** Champion Details Start ***** -->
           <div class="heading-section">
-            <h4><em>Champion</em> Detail</h4>
+            <h4><em>챔피언</em> 상세정보</h4>
         </div>
           <div class="most-popular">
             <div class="row">
@@ -126,7 +126,7 @@
                   <p><strong>Tips:</strong> {{ champion.allytips }}</p>
                   <p><strong>Enemy Tips:</strong> {{ champion.enemytips }}</p>
 
-                  <h2>Champion Stats</h2>
+                  {% comment %} <h2>Champion Stats</h2>
                   <p><strong>HP:</strong> {{ champion.championstat.hp }}</p>
                   <p><strong>HP per level:</strong> {{ champion.championstat.hpperlevel }}</p>
                   <p><strong>MP:</strong> {{ champion.championstat.mp }}</p>
@@ -146,20 +146,31 @@
                   <p><strong>Attack Damage:</strong> {{ champion.championstat.attackdamage }}</p>
                   <p><strong>Attack Damage per level:</strong> {{ champion.championstat.attackdamageperlevel }}</p>
                   <p><strong>Attack Speed per level:</strong> {{ champion.championstat.attackspeedperlevel }}</p>
-                  <p><strong>Attack Speed:</strong> {{ champion.championstat.attackspeed }}</p>
+                  <p><strong>Attack Speed:</strong> {{ champion.championstat.attackspeed }}</p> {% endcomment %}
 
-                  <h2>Champion Spells</h2>
+                  <h2>스킬 빌드</h2>
                   <ul>
-                    {% for spell in champion.championspell_set.all %}
                     <li>
-                      <strong>{{ spell.name }}:</strong> {{ spell.description }}
+                      <img src="{% static skill_images.Q %}" alt="Q spell image" class="spell-image">
+                      <strong>Q:</strong> {{ champion.championspell_set.all.0.name }} - {{ champion.championspell_set.all.0.description }}
                     </li>
-                    {% endfor %}
+                    <li>
+                      <img src="{% static skill_images.W %}" alt="W spell image" class="spell-image">
+                      <strong>W:</strong> {{ champion.championspell_set.all.1.name }} - {{ champion.championspell_set.all.1.description }}
+                    </li>
+                    <li>
+                      <img src="{% static skill_images.E %}" alt="E spell image" class="spell-image">
+                      <strong>E:</strong> {{ champion.championspell_set.all.2.name }} - {{ champion.championspell_set.all.2.description }}
+                    </li>
+                    <li>
+                      <img src="{% static skill_images.R %}" alt="R spell image" class="spell-image">
+                      <strong>R:</strong> {{ champion.championspell_set.all.3.name }} - {{ champion.championspell_set.all.3.description }}
+                    </li>
                   </ul>
 
                   <h2>Passive</h2>
                   <p>
-                    <img src="{% static 'assets/images/loading/' %}{{ champion.id }}_{{ champion.championpassive.name|slugify }}.png" alt="{{ champion.championpassive.name }} image" class="passive-image">
+                    <img src="{% static passive_image %}" alt="{{ champion.championpassive.name }} image" class="passive-image">
                     <strong>{{ champion.championpassive.name }}:</strong> {{ champion.championpassive.description }}
                   </p>
 
@@ -171,8 +182,9 @@
                     </li>
                     {% endfor %}
                   </ul>
-
-                  <a href="{% url 'champion_list' %}">Back to Champion List</a>
+                  <div class="main-button">
+                  <a href="{% url 'champion_list' %}">챔피언 전체 목록</a>
+                  </div>
                 </div>
               </div>
             </div>

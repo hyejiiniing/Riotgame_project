@@ -11,6 +11,8 @@ from .serializers import MatchSerializer
 from rest_framework import viewsets
 from model_champion.models import Champion 
 import logging
+import os
+from django.conf import settings
 
 logger = logging.getLogger(__name__)
 
@@ -71,4 +73,29 @@ def champion_list(request):
 
 def champion_detail(request, champion_id):
     champion = get_object_or_404(Champion, id=champion_id)
-    return render(request, 'riot_app/champion_detail.html', {'champion': champion})
+    passive_image = None
+    skill_images = {'Q': None, 'W': None, 'E': None, 'R': None}
+
+    # 패시브 이미지 폴더 경로
+    passive_image_dir = os.path.join(settings.BASE_DIR, 'static/assets/images/passive')
+
+    # 패시브 이미지 파일 이름 찾기
+    for filename in os.listdir(passive_image_dir):
+        if filename.startswith(champion_id):
+            passive_image = os.path.join('assets/images/passive', filename)
+            break
+
+    # 스킬 이미지 파일 이름 찾기
+    spell_image_dir = os.path.join(settings.BASE_DIR, 'static/assets/images/spell')
+    for spell_key in skill_images.keys():
+        for filename in os.listdir(spell_image_dir):
+            if filename.startswith(f"{champion_id}{spell_key}"):
+                skill_images[spell_key] = os.path.join('assets/images/spell', filename)
+                break
+
+    context = {
+        'champion': champion,
+        'passive_image': passive_image,
+        'skill_images': skill_images,
+    }
+    return render(request, 'riot_app/champion_detail.html', context)
