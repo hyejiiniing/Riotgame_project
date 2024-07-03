@@ -22,6 +22,42 @@
   <link rel="stylesheet" href="{% static 'assets/css/animate.css' %}">
   <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
 
+  <style>
+    .champion-list ul {
+      list-style-type: none;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .champion-list ul li {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 20px;
+      text-align: center;
+    }
+
+    .champion-list ul li img {
+      width: 90px;
+      height: 90px;
+      object-fit: cover;
+      border-radius: 10%;
+    }
+
+    .champion-list ul li div {
+      margin-top: 10px;
+    }
+    .page-content {
+        padding-top: 10px; /* 줄어든 공백 */
+      }
+  
+      .most-popular {
+        margin-top: 10px; /* 줄어든 공백 */
+      }
+  </style>
+
   <!--
 
   TemplateMo 579 Cyborg Gaming
@@ -93,14 +129,16 @@
           <!-- ***** Champion List Start ***** -->
           <div class="row">
             <div class="col-lg-12">
-              <div class="champion-list">
-                <h1>Champion List</h1>
+              <div class="champion-list most-popular">
+                <div class="heading-section">
+                    <h4><em>Champion</em> List</h4>
+                </div>
                 <ul>
                   {% for champion in champions %}
                   <li>
                     <a href="{% url 'champion_detail' champion.id %}">
-                      <img src="{% static 'assets/images/champion/' %}{{ champion.id }}.png" alt="{{ champion.name }} image" style="width: 50px; height: 50px;">
-                      {{ champion.name }}
+                      <img src="{% static 'assets/images/champion/' %}{{ champion.id }}.png" alt="{{ champion.name }} image">
+                      <div>{{ champion.name }}</div>
                     </a>
                   </li>
                   {% endfor %}
