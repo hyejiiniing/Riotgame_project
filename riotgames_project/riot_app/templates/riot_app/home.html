@@ -138,18 +138,6 @@
           </div>
           <!-- 메인 배너 끝 -->
 
-          {% comment %} <ul>
-            {% for champion in champions %}
-                <li> 
-                    <a href="{% url 'champion_detail' champion.name %}">
-                        <img src="{{ champion.image }}" alt="{{ champion.name }}">
-                        {{ champion.name }}
-                    </a>
-                </li>
-            {% endfor %}
-        </ul> {% endcomment %}
-
-
            <!-- ***** Featured Games Start ***** -->
             <!-- ***** Live Stream Start ***** -->
           <div class="live-stream">
@@ -545,6 +533,9 @@
                         </div>
                     {% endfor %}
                 </div>
+                <div class="main-button">
+                  <a href="{% url 'champion_list.html' %}">챔피언 더보기</a>
+                </div>
               </div>
           </div>
           <!-- 로테이션 끝 -->
@@ -591,6 +582,7 @@
                 <a href="profile.html">View Your Library</a>
               </div>
             </div>
+           
           </div>
           <!-- ***** Gaming Library End ***** -->
         </div>
