@@ -136,4 +136,4 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-RIOT_API_KEY = os.getenv('RIOT_API_KEY', 'RGAPI-e819ebc5-4eac-46ec-822b-8948c3dde490')
+RIOT_API_KEY = os.getenv('RIOT_API_KEY', 'RGAPI-9f4d5650-0454-47d6-ab11-cab8dced5dd1')
