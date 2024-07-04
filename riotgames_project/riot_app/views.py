@@ -13,13 +13,17 @@ from model_champion.models import Champion, ChampionSkin
 import logging
 import os
 from django.conf import settings
+from django.utils import timezone
+
 
 logger = logging.getLogger(__name__)
 
 # 홈 화면 뷰
 def home_view(request):
+    # 챔피언 로테이션 데이터 가져오기
     rotation_data = get_champion_rotation()
     champion_data = get_champion_data()
+    
     if rotation_data and champion_data:
         id_to_name = map_champion_id_to_name(champion_data)
         champions = []
@@ -30,8 +34,17 @@ def home_view(request):
                     'name': champion_name,
                     'image': f"http://ddragon.leagueoflegends.com/cdn/11.24.1/img/champion/{champion_name}.png"
                 })
-        return render(request, 'riot_app/home.html', {'champions': champions})
-    return render(request, 'riot_app/home.html', {'champions': []})
+    else:
+        champions = []
+
+    # 경기 일정 데이터 가져오기
+    current_date = timezone.now().date()
+    upcoming_matches = Match.objects.filter(match_date__gte=current_date).order_by('match_date')[:4]
+
+    return render(request, 'riot_app/home.html', {
+        'champions': champions,
+        'upcoming_matches': upcoming_matches
+    })
 
 def match_list(request):
     # 기본 7월 데이터 필터링
