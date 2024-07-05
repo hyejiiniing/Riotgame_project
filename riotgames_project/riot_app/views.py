@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
-from .utils import get_champion_rotation, get_champion_data, map_champion_id_to_name
+from .utils import get_champion_rotation, get_champion_data, map_champion_id_to_name, parse_match_date, parse_match_time
 from .models import Match
 from itertools import groupby
 from datetime import datetime
@@ -39,7 +39,19 @@ def home_view(request):
 
     # 경기 일정 데이터 가져오기
     current_date = timezone.now().date()
-    upcoming_matches = Match.objects.filter(match_date__gte=current_date).order_by('match_date')[:4]
+    all_matches = Match.objects.all()
+    
+    upcoming_matches = []
+    for match in all_matches:
+        match_date = parse_match_date(match.match_date)
+        if match_date and match_date >= current_date:
+            upcoming_matches.append(match)
+
+    # 날짜순으로 정렬
+    upcoming_matches = sorted(upcoming_matches, key=lambda x: parse_match_date(x.match_date))[:4]
+    
+    logger.debug(f"Current date: {current_date}")
+    logger.debug(f"Upcoming matches: {upcoming_matches}")
 
     return render(request, 'riot_app/home.html', {
         'champions': champions,

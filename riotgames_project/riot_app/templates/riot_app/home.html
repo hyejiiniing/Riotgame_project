@@ -67,6 +67,10 @@
       .slideshow-slide.hidden {
         opacity: 0;
       }
+      .team-logo {
+        width: 50px; /* 원하는 크기로 조절 */
+        height: 50px; /* 원하는 크기로 조절 */
+    }
     </style>
 
     <head>
@@ -109,29 +113,39 @@
                   <!-- ***** Upcoming Matches Start ***** -->
                   <div class="upcoming-matches">
                     <div class="col-lg-12">
-                      <div class="heading-section">
-                        <h4><em>Upcoming</em> Matches</h4>
-                      </div>
+                        <div class="heading-section">
+                            <h4><em>Upcoming</em> Matches</h4>
+                        </div>
                     </div>
                     <div class="row">
-                      {% for match in upcoming_matches %}
-                      <div class="col-lg-6 col-sm-12">
-                        <div class="match-card">
-                          <div class="team">
-                            <img src="{{ match.team_a_logo }}" alt="{{ match.team_a_name }} Logo" class="team-logo">
-                            <div class="team-name">{{ match.team_a_name }}</div>
-                          </div>
-                          <div class="vs">VS</div>
-                          <div class="team">
-                            <img src="{{ match.team_b_logo }}" alt="{{ match.team_b_name }} Logo" class="team-logo">
-                            <div class="team-name">{{ match.team_b_name }}</div>
-                          </div>
-                          <div class="match-date">{{ match.match_date }}</div>
-                        </div>
-                      </div>
-                      {% endfor %}
+                        {% if upcoming_matches %}
+                            {% for match in upcoming_matches %}
+                            <div class="col-lg-6 col-sm-12">
+                                <div class="match-card">
+                                    <div class="team">
+                                        <img src="{{ match.team_a_logo }}" alt="{{ match.team_a_name }} Logo" class="team-logo">
+                                        <div class="team-name">{{ match.team_a_name }}</div>
+                                    </div>
+                                    <div class="vs">VS</div>
+                                    <div class="team">
+                                        <img src="{{ match.team_b_logo }}" alt="{{ match.team_b_name }} Logo" class="team-logo">
+                                        <div class="team-name">{{ match.team_b_name }}</div>
+                                    </div>
+                                    <div class="match-date">{{ match.match_date }}</div>
+                                    <div class="match-time">{{ match.match_time }}</div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        {% else %}
+                            <p>No upcoming matches available.</p>
+                        {% endif %}
                     </div>
-                  </div>
+                </div>
+                
+                
+                
+                
+                
                   <!-- ***** Upcoming Matches End ***** -->
                 </div>
               </div>

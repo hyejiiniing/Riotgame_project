@@ -2,6 +2,8 @@ import requests
 import os
 from bs4 import BeautifulSoup
 from datetime import datetime, timedelta
+import datetime
+import re
 
 # 로테이션 챔피언 목록 가져오기
 def get_champion_rotation():
@@ -29,6 +31,24 @@ def map_champion_id_to_name(champion_data):
         id_to_name[int(champ['key'])] = champ['id']
     return id_to_name
 
+def parse_match_date(date_str):
+    # '08월 18일 (일)' 형식의 날짜 문자열을 datetime.date로 변환
+    month_map = {
+        '01': 1, '02': 2, '03': 3, '04': 4, '05': 5,
+        '06': 6, '07': 7, '08': 8, '09': 9, '10': 10,
+        '11': 11, '12': 12
+    }
+    match = re.match(r'(\d{2})월 (\d{2})일', date_str)
+    if match:
+        month = month_map[match.group(1)]
+        day = int(match.group(2))
+        year = datetime.datetime.now().year
+        return datetime.date(year, month, day)
+    return None
+
+def parse_match_time(time_str):
+    # 'HH:MM' 형식의 시간 문자열을 datetime.time으로 변환
+    return datetime.datetime.strptime(time_str, '%H:%M').time()
 
 # def get_lck_schedule():
 #     url = 'https://lolesports.com/ko-KR/schedule?leagues=lck'
