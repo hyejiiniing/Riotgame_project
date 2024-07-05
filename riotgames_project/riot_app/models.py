@@ -11,6 +11,18 @@ class Match(models.Model):
 
     def __str__(self):
         return f"{self.team_a_name} vs {self.team_b_name} on {self.match_date} at {self.match_time}"
+    
+# 팀 정보
+class Player(models.Model):
+    team_logo = models.URLField()
+    team_name = models.CharField(max_length=100)
+    position_icon = models.CharField(max_length=100)
+    position_name = models.CharField(max_length=10)
+    player_photo = models.URLField()
+    player_name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.player_name
 
 # lck 순위
 # class TeamRanking(models.Model):
