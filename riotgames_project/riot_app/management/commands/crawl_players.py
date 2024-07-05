@@ -56,7 +56,7 @@ class Command(BaseCommand):
             team_name = team_names.get(team_id, 'Unknown')
 
             driver.get(team_url)
-            time.sleep(3)  # 페이지 로딩 대기
+            time.sleep(5)  # 페이지 로딩 대기
 
             try:
                 team_logo_element = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, 'img.filter_logo__3XxOU')))

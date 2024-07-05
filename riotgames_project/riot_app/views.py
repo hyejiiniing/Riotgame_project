@@ -14,7 +14,7 @@ import logging
 import os
 from django.conf import settings
 from django.utils import timezone
-
+from .models import Player
 
 logger = logging.getLogger(__name__)
 
@@ -135,3 +135,20 @@ def champion_detail(request, champion_id):
         'skin_images': skin_images,
     }
     return render(request, 'riot_app/champion_detail.html', context)
+
+def player_list(request):
+    # 팀별로 플레이어 그룹화
+    players = Player.objects.all()
+    players_by_team = {}
+    for player in players:
+        if player.team_name not in players_by_team:
+            players_by_team[player.team_name] = {
+                'team_logo': player.team_logo,
+                'team_name': player.team_name,
+                'players': []
+            }
+        players_by_team[player.team_name]['players'].append(player)
+
+    players_by_team = list(players_by_team.values())
+    
+    return render(request, 'riot_app/player_list.html', {'players_by_team': players_by_team})

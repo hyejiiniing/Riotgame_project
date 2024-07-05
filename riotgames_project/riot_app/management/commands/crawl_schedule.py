@@ -16,7 +16,7 @@ class Command(BaseCommand):
         options = webdriver.ChromeOptions()
         browser = webdriver.Chrome(service=service, options=options)
 
-        search_url = "https://game.naver.com/esports/schedule/lck?date=2024-09"
+        search_url = "https://game.naver.com/esports/schedule/lck?date=2024-0"
         browser.get(search_url)
         browser.implicitly_wait(10)
 
