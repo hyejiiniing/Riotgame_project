@@ -20,9 +20,9 @@
     <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
 </head>
 <body>
-    <head>
+    <header>
         {% include 'riot_app/top.html' %}
-    </head>
+    </header>
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -30,21 +30,42 @@
                     <!-- ***** Player List Start ***** -->
                     <div class="featured-games header-text">
                         <div class="heading-section">
-                            <h4><em>Team</em> Player List</h4>
+                            <h4><em>팀</em> 로스터</h4>
                         </div>
-                        {% for team in players_by_team %}
                         <div class="team">
-                            <h2><img src="{{ team.team_logo }}" alt="{{ team.team_name }}" style="width: 50px; height: 50px;"> {{ team.team_name }}</h2>
-                            {% for player in team.players %}
-                            <div class="player">
-                                <p>{{ player.position_name }}</p>
-                                <img src="{{ player.player_photo }}" alt="{{ player.player_name }}" style="width: 100px; height: 100px;">
-                                <p>{{ player.player_name }}</p>
+                            <h2>T1</h2>
+                            <div class="row">
+                                {% for player in players %}
+                                    {% if player.team_name == 'T1' %}
+                                        <div class="col-md-3">
+                                            <div class="player">
+                                                <p>{{ player.position_name }}</p>
+                                                <img src="{{ player.player_photo }}" alt="{{ player.player_name }}" style="width: 100px; height: 100px;">
+                                                <p>{{ player.player_name }}</p>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
                             </div>
                             <hr>
-                            {% endfor %} 
                         </div>
-                        {% endfor %}
+                        <div class="">
+                            <h2>젠지</h2>
+                            <div class="row">
+                                {% for player in players %}
+                                    {% if player.team_name == '젠지' %}
+                                        <div class="col-md-3">
+                                            <div class="player">
+                                                <p>{{ player.position_name }}</p>
+                                                <img src="{{ player.player_photo }}" alt="{{ player.player_name }}" style="width: 100px; height: 100px;">
+                                                <p>{{ player.player_name }}</p>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                            <hr>
+                        </div>
                     </div>
                     <!-- ***** Player List End ***** -->
                 </div>

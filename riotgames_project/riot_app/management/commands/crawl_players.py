@@ -37,15 +37,15 @@ class Command(BaseCommand):
         # 팀 ID와 이름 매핑
         team_names = {
             'R1040': 'T1',
-            'R479': 'Gen.G',
-            'R105': 'KT',
-            'R1152': 'DK',
-            'R480': 'Hanwha',
-            'R1070': 'BNK',
-            'R1118': 'KDF',
-            'R1071': 'OK Savings',
+            'R479': '젠지',
+            'R105': 'KT 롤스터',
+            'R1152': 'Dplus KIA',
+            'R480': '한화생명e스포츠',
+            'R1070': 'BNK 피어엑스',
+            'R1118': '광동 프릭스',
+            'R1071': 'OK저축은행 브리온',
             'R1041': 'DRX',
-            'R1072': 'NS RedForce'
+            'R1072': '농심 레드포스'
         }
 
         # Explicit wait 설정
