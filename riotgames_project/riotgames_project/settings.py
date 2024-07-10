@@ -96,5 +96,3 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
-RIOT_API_KEY = os.getenv('RIOT_API_KEY', 'RGAPI-9f4d5650-0454-47d6-ab11-cab8dced5dd1')
