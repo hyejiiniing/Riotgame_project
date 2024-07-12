@@ -37,10 +37,10 @@
                             <div class="row">
                                 {% for player in players %}
                                     {% if player.team_name == 'T1' %}
-                                        <div class="col-md-3">
+                                        <div class="col-md-2">
                                             <div class="player">
                                                 <p>{{ player.position_name }}</p>
-                                                <img src="{{ player.player_photo }}" alt="{{ player.player_name }}" style="width: 100px; height: 100px;">
+                                                <img src="{{ player.player_photo }}" alt="{{ player.player_name }}" style="width: 120px; height: 120px;">
                                                 <p>{{ player.player_name }}</p>
                                             </div>
                                         </div>
@@ -49,15 +49,17 @@
                             </div>
                             <hr>
                         </div>
+
+                        <!-- 젠지 -->
                         <div class="">
                             <h2>젠지</h2>
                             <div class="row">
                                 {% for player in players %}
                                     {% if player.team_name == '젠지' %}
-                                        <div class="col-md-3">
+                                        <div class="col-md-2">
                                             <div class="player">
                                                 <p>{{ player.position_name }}</p>
-                                                <img src="{{ player.player_photo }}" alt="{{ player.player_name }}" style="width: 100px; height: 100px;">
+                                                <img src="{{ player.player_photo }}" alt="{{ player.player_name }}" style="width: 120px; height: 120px;">
                                                 <p>{{ player.player_name }}</p>
                                             </div>
                                         </div>
@@ -66,6 +68,26 @@
                             </div>
                             <hr>
                         </div>
+
+                        <!-- 한화 -->
+                        <div class="">
+                            <h2>한화생명e스포츠</h2>
+                            <div class="row">
+                                {% for player in players %}
+                                    {% if player.team_name == '한화생명e스포츠' %}
+                                        <div class="col-md-2">
+                                            <div class="player">
+                                                <p>{{ player.position_name }}</p>
+                                                <img src="{{ player.player_photo }}" alt="{{ player.player_name }}" style="width: 120px; height: 120px;">
+                                                <p>{{ player.player_name }}</p>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                            <hr>
+                        </div>
+
                     </div>
                     <!-- ***** Player List End ***** -->
                 </div>
