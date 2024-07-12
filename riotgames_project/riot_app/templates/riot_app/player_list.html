@@ -69,12 +69,145 @@
                             <hr>
                         </div>
 
-                        <!-- 한화 -->
+                        <!-- 한화생명e스포츠 -->
                         <div class="">
                             <h2>한화생명e스포츠</h2>
                             <div class="row">
                                 {% for player in players %}
                                     {% if player.team_name == '한화생명e스포츠' %}
+                                        <div class="col-md-2">
+                                            <div class="player">
+                                                <p>{{ player.position_name }}</p>
+                                                <img src="{{ player.player_photo }}" alt="{{ player.player_name }}" style="width: 120px; height: 120px;">
+                                                <p>{{ player.player_name }}</p>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                            <hr>
+                        </div>
+
+                        <!-- KT 롤스터 -->
+                        <div class="">
+                            <h2>KT 롤스터</h2>
+                            <div class="row">
+                                {% for player in players %}
+                                    {% if player.team_name == 'KT 롤스터' %}
+                                        <div class="col-md-2">
+                                            <div class="player">
+                                                <p>{{ player.position_name }}</p>
+                                                <img src="{{ player.player_photo }}" alt="{{ player.player_name }}" style="width: 120px; height: 120px;">
+                                                <p>{{ player.player_name }}</p>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                            <hr>
+                        </div>
+
+                        <!-- Dplus KIA -->
+                        <div class="">
+                            <h2>Dplus KIA</h2>
+                            <div class="row">
+                                {% for player in players %}
+                                    {% if player.team_name == 'Dplus KIA' %}
+                                        <div class="col-md-2">
+                                            <div class="player">
+                                                <p>{{ player.position_name }}</p>
+                                                <img src="{{ player.player_photo }}" alt="{{ player.player_name }}" style="width: 120px; height: 120px;">
+                                                <p>{{ player.player_name }}</p>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                            <hr>
+                        </div>
+
+                        <!-- DRX -->
+                        <div class="">
+                            <h2>DRX</h2>
+                            <div class="row">
+                                {% for player in players %}
+                                    {% if player.team_name == 'DRX' %}
+                                        <div class="col-md-2">
+                                            <div class="player">
+                                                <p>{{ player.position_name }}</p>
+                                                <img src="{{ player.player_photo }}" alt="{{ player.player_name }}" style="width: 120px; height: 120px;">
+                                                <p>{{ player.player_name }}</p>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                            <hr>
+                        </div>
+
+                        <!-- BNK 피어엑스 -->
+                        <div class="">
+                            <h2>BNK 피어엑스</h2>
+                            <div class="row">
+                                {% for player in players %}
+                                    {% if player.team_name == 'BNK 피어엑스' %}
+                                        <div class="col-md-2">
+                                            <div class="player">
+                                                <p>{{ player.position_name }}</p>
+                                                <img src="{{ player.player_photo }}" alt="{{ player.player_name }}" style="width: 120px; height: 120px;">
+                                                <p>{{ player.player_name }}</p>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                            <hr>
+                        </div>
+
+                        <!-- 광동 프릭스 -->
+                        <div class="">
+                            <h2>광동 프릭스</h2>
+                            <div class="row">
+                                {% for player in players %}
+                                    {% if player.team_name == '광동 프릭스' %}
+                                        <div class="col-md-2">
+                                            <div class="player">
+                                                <p>{{ player.position_name }}</p>
+                                                <img src="{{ player.player_photo }}" alt="{{ player.player_name }}" style="width: 120px; height: 120px;">
+                                                <p>{{ player.player_name }}</p>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                            <hr>
+                        </div>
+
+                        <!-- 농심 레드포스 -->
+                        <div class="">
+                            <h2>농심 레드포스</h2>
+                            <div class="row">
+                                {% for player in players %}
+                                    {% if player.team_name == '농심 레드포스' %}
+                                        <div class="col-md-2">
+                                            <div class="player">
+                                                <p>{{ player.position_name }}</p>
+                                                <img src="{{ player.player_photo }}" alt="{{ player.player_name }}" style="width: 120px; height: 120px;">
+                                                <p>{{ player.player_name }}</p>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                            <hr>
+                        </div>
+
+                        <!-- OK저축은행 브리온 -->
+                        <div class="">
+                            <h2>OK저축은행 브리온</h2>
+                            <div class="row">
+                                {% for player in players %}
+                                    {% if player.team_name == 'OK저축은행 브리온' %}
                                         <div class="col-md-2">
                                             <div class="player">
                                                 <p>{{ player.position_name }}</p>
