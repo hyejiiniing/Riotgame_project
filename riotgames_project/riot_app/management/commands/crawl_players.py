@@ -59,10 +59,6 @@ class Command(BaseCommand):
             time.sleep(5)  # 페이지 로딩 대기
 
             try:
-                team_logo_element = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, 'img.filter_logo__3XxOU')))
-                team_logo = team_logo_element.get_attribute('src')
-                self.stdout.write(f'DEBUG: Team Logo: {team_logo}')
-
                 self.stdout.write(f'DEBUG: Team Name: {team_name}')
 
                 # 로스터 테이블 찾기
@@ -99,7 +95,6 @@ class Command(BaseCommand):
                             # 데이터 저장
                             try:
                                 Player.objects.create(
-                                    team_logo=team_logo,
                                     team_name=team_name,
                                     position_name=position_name,
                                     player_photo=player_photo,
@@ -110,10 +105,6 @@ class Command(BaseCommand):
                                 self.stdout.write(self.style.ERROR(f'Error saving player data: {e}'))
             except Exception as e:
                 self.stdout.write(self.style.ERROR(f'Error during crawling team: {e}'))
-                # 스크린샷 저장
-                screenshot_path = os.path.join(os.path.expanduser("~"), f'error_screenshot_{team_name}.png')
-                driver.save_screenshot(screenshot_path)
-                self.stdout.write(self.style.ERROR(f'Screenshot saved to: {screenshot_path}'))
 
         driver.quit()
         self.stdout.write(self.style.SUCCESS('Successfully crawled and saved player data for all teams'))
