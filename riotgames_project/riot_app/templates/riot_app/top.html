@@ -12,6 +12,16 @@
   <link rel="stylesheet" href="{% static 'assets/css/owl.css' %}">
   <link rel="stylesheet" href="{% static 'assets/css/animate.css' %}">
   <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+  <style>
+    .nav a {
+      padding: 10px 20px;
+      display: inline-block;
+    }
+    .nav a:hover,
+    .nav a.active {
+      color: #ffffff;
+    }
+  </style>
 </head>
 <body>
   <!-- ***** Header Area Start ***** -->
@@ -20,7 +30,7 @@
       <div class="row">
         <div class="col-12">
           <nav class="main-nav">
-            <a href="index.html" class="logo">
+            <a href="{% url 'home' %}" class="logo">
               <img src="{% static 'assets/images/logo.png' %}" alt="">
             </a>
             <div class="search-input">
@@ -30,14 +40,13 @@
               </form>
             </div>
             <ul class="nav">
-              <li><a href="{% url 'home' %}">홈</a></li>
-              <li><a href="{% url 'champion_list' %}">챔피언 분석</a></li>
-              <li><a href="{% url 'player_list' %}">로스터</a></li>
-              <li><a href="{% url 'match_list' %}">경기일정</a></li>
-              <li><a href="">Streams</a></li>
-              <li><a href="">Profile <img src="{% static 'assets/images/profile-header.jpg' %}" alt=""></a></li>
+              <li><a href="{% url 'home' %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">홈</a></li>
+              <li><a href="{% url 'champion_list' %}" class="{% if request.resolver_match.url_name == 'champion_list' %}active{% endif %}">챔피언 분석</a></li>
+              <li><a href="{% url 'player_list' %}" class="{% if request.resolver_match.url_name == 'player_list' %}active{% endif %}">로스터</a></li>
+              <li><a href="{% url 'match_list' %}" class="{% if request.resolver_match.url_name == 'match_list' %}active{% endif %}">경기일정</a></li>
+              <li><a href="" class="{% if request.resolver_match.url_name == 'streams' %}active{% endif %}">Streams</a></li>
+              <li><a href="{% url 'login' %}" class="{% if request.resolver_match.url_name == 'login' %}active{% endif %}">Profile <img src="{% static 'assets/images/profile-header.jpg' %}" alt=""></a></li>
             </ul>
-
           </nav>
         </div>
       </div>

@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 class Match(models.Model):
     team_a_name = models.CharField(max_length=100)
@@ -36,3 +37,22 @@ class Player(models.Model):
 #     kills = models.IntegerField(default=0)    
 #     deaths = models.IntegerField(default=0)    
 #     assists = models.IntegerField(default=0)   
+
+# # 계정
+# class Member(models.Model):
+#     member_id = models.CharField(max_length=30, primary_key=True)
+#     member_password = models.CharField(max_length=30)
+#     member_name = models.CharField(max_length=20)
+#     member_nickname = models.CharField(max_length=30)
+#     member_gender = models.CharField(max_length=5)
+#     member_email = models.CharField(max_length=40)
+#     member_phone = models.CharField(max_length=25)
+#     member_zipcode = models.CharField(max_length=15)
+#     member_address1 = models.CharField(max_length=100)
+#     member_address2 = models.CharField(max_length=100, default='') 
+#     member_birthday = models.CharField(max_length=15)
+#     reg_date = models.DateTimeField(default=timezone.now)
+
+#     def __str__(self):
+#         return "self.member_id="+self.member_id+", self.member_password="+self.member_password
+

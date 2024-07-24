@@ -139,3 +139,29 @@ def champion_detail(request, champion_id):
 def player_list(request):
     players = Player.objects.all()
     return render(request, 'riot_app/player_list.html', {'players': players})
+
+# 로그인
+def login(request):
+    if request.method != 'POST':
+        return render(request, 'member/login.html')  # 로그인 폼 이동
+    else: 
+        member_id = request.POST['member_id']
+        member_password = request.POST['member_password']
+        
+        try:
+            member = Member.objects.get(member_id=member_id)
+            if member.member_password == member_password:
+                request.session['login_id'] = member.member_id  # 로그인 정보 session에 저장
+                request.session['login_point'] = member.member_point
+                request.session['login_grade'] = member.grade_name 
+                return HttpResponseRedirect("/")  # 메인 페이지로 리디렉션 (로그인 상태)
+            else:
+                context = {"msg": "비밀번호가 틀립니다.", "url": "../login/"}
+                messages.error(request, '비밀번호가 틀렸습니다.')
+                return render(request, 'member/login.html', context)
+        except Member.DoesNotExist:
+            messages.error(request, '아이디가 틀렸습니다.')
+            return render(request, 'member/login.html', {"errormsg": "아이디가 틀립니다."})
+
+
+    

@@ -12,6 +12,7 @@ urlpatterns = [
     path('champions/', views.champion_list, name='champion_list'),
     path('champions/<str:champion_id>/', views.champion_detail, name='champion_detail'),
     path('players/', player_list, name='player_list'),
+    path('login/', views.login, name='login'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
