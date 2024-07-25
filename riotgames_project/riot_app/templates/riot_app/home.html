@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     {% load static %}
     <meta charset="utf-8">
@@ -103,11 +102,13 @@
         color: #aaa;
       }
       .thumbnail {
-        width: 100%;
-        height: auto;
-        max-width: 400px; /* 원하는 최대 너비 */
-        max-height: 225px; /* 원하는 최대 높이 */
-        object-fit: cover;
+        width: 330px;
+        height: 200px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+      .item {
+        text-align: center;
       }
     </style>
 
@@ -213,60 +214,36 @@
     <div class="row">
       <div class="col-lg-6">
         <div class="item">
-          <ul>
-            <li>
-              <a href="https://youtu.be/pmOYy1Yltjc?si=UNrsZFQxBOqaAUke" target="_blank">
-                <img src="https://img.youtube.com/vi/pmOYy1Yltjc/maxresdefault.jpg" alt="" class="templatemo-item thumbnail">
+              <a href="{{ latest_videos.0.url }}" target="_blank">
+                <img src="{{ latest_videos.0.thumbnail_url }}" alt="" class="thumbnail">
               </a>
-            </li>
-            <li>
-              <h4>Peanut, Delight 인터뷰 | HLE vs. T1 | 07.12 | 2024 LCK 서머 스플릿</h4>
-            </li>
-          </ul>
+              <h6>{{ latest_videos.0.title }}</h4>
         </div>
       </div>
       <div class="col-lg-6">
         <div class="item">
-          <ul>
-            <li>
-              <a href="https://youtu.be/pmOYy1Yltjc?si=UNrsZFQxBOqaAUke" target="_blank">
-                <img src="https://img.youtube.com/vi/pmOYy1Yltjc/maxresdefault.jpg" alt="" class="templatemo-item thumbnail">
+              <a href="{{ latest_videos.1.url }}" target="_blank">
+                <img src="{{ latest_videos.1.thumbnail_url }}" alt="" class="thumbnail">
               </a>
-            </li>
-            <li>
-              <h4>캐리 바드세요 | HLE vs. T1 게임3 하이라이트 | 07.12 | 2024 LCK 서머 스플릿</h4>
-            </li>
-          </ul>
+              <h6>{{ latest_videos.1.title }}</h4>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-lg-6">
         <div class="item">
-          <ul>
-            <li>
-              <a href="https://youtu.be/pmOYy1Yltjc?si=UNrsZFQxBOqaAUke" target="_blank">
-                <img src="https://img.youtube.com/vi/pmOYy1Yltjc/maxresdefault.jpg" alt="" class="templatemo-item thumbnail">
+              <a href="{{ latest_videos.2.url }}" target="_blank">
+                <img src="{{ latest_videos.2.thumbnail_url }}" alt="" class="thumbnail">
               </a>
-            </li>
-            <li>
-              <h4>FOX vs. KT | 매치35 하이라이트 | 07.12 | 2024 LCK 서머 스플릿</h4>
-            </li>
-          </ul>
+              <h6>{{ latest_videos.2.title }}</h4>
         </div>
       </div>
       <div class="col-lg-6">
-        <div class="item last-item">
-          <ul>
-            <li>
-              <a href="https://youtu.be/pmOYy1Yltjc?si=UNrsZFQxBOqaAUke" target="_blank">
-                <img src="https://img.youtube.com/vi/pmOYy1Yltjc/maxresdefault.jpg" alt="" class="templatemo-item thumbnail">
+        <div class="item">
+              <a href="{{ latest_videos.3.url }}" target="_blank">
+                <img src="{{ latest_videos.3.thumbnail_url }}" alt="" class="thumbnail">
               </a>
-            </li>
-            <li>
-              <h4>Deft 인터뷰 | FOX vs. KT | 07.12 | 2024 LCK 서머 스플릿</h4>
-            </li>
-          </ul>
+              <h6>{{ latest_videos.3.title }}</h4>
         </div>
       </div>
     </div>
@@ -313,4 +290,5 @@
   <script src="{% static 'assets/js/custom.js' %}"></script>
 
 </body>
+
 </html>

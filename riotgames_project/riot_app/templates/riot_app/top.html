@@ -45,7 +45,7 @@
               <li><a href="{% url 'player_list' %}" class="{% if request.resolver_match.url_name == 'player_list' %}active{% endif %}">로스터</a></li>
               <li><a href="{% url 'match_list' %}" class="{% if request.resolver_match.url_name == 'match_list' %}active{% endif %}">경기일정</a></li>
               <li><a href="" class="{% if request.resolver_match.url_name == 'streams' %}active{% endif %}">Streams</a></li>
-              <li><a href="{% url 'login' %}" class="{% if request.resolver_match.url_name == 'login' %}active{% endif %}">Profile <img src="{% static 'assets/images/profile-header.jpg' %}" alt=""></a></li>
+              <li><a href="" class="{% if request.resolver_match.url_name == 'login' %}active{% endif %}">Profile <img src="{% static 'assets/images/profile-header.jpg' %}" alt=""></a></li>
             </ul>
           </nav>
         </div>
