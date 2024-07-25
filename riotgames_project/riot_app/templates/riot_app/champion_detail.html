@@ -101,7 +101,7 @@
       border: 2px solid #ec6090;
       padding: 20px;
       border-radius: 10px;
-      margin-top: 30px; /* 챔피언 이미지 바로 밑에서 시작하게 설정 */
+      margin-top: 30px;
     }
 
     .skills-and-passive h2 {
@@ -116,6 +116,13 @@
       margin-bottom: 10px;
     }
 
+    .spell-image {
+      width: 30px;
+      height: 30px;
+      margin-right: 10px;
+      vertical-align: middle;
+    }
+
     .swiper {
       width: 100%;
       padding-top: 20px;
@@ -126,12 +133,14 @@
       background-position: center;
       background-size: cover;
       width: 300px;
-      height: 300px;
+      height: 400px;
     }
 
     .swiper-slide img {
       display: block;
       width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .swiper-button-next, .swiper-button-prev {
@@ -172,59 +181,62 @@
                   <p><strong>배경:</strong> {{ champion.lore }}</p>
                   <p><strong>Tips:</strong> {{ champion.allytips }}</p>
                   <p><strong>Enemy Tips:</strong> {{ champion.enemytips }}</p>
+                </div>
+              </div>
+              <div class="col-lg-12 skills-and-passive">
+                <h2>스킬 빌드</h2>
+                <ul>
+                  <li>
+                    <img src="{% static skill_images.Q %}" alt="Q spell image" class="spell-image">
+                    <strong>Q:</strong> {{ champion.championspell_set.all.0.name }} - {{ champion.championspell_set.all.0.description }}
+                  </li>
+                  <li>
+                    <img src="{% static skill_images.W %}" alt="W spell image" class="spell-image">
+                    <strong>W:</strong> {{ champion.championspell_set.all.1.name }} - {{ champion.championspell_set.all.1.description }}
+                  </li>
+                  <li>
+                    <img src="{% static skill_images.E %}" alt="E spell image" class="spell-image">
+                    <strong>E:</strong> {{ champion.championspell_set.all.2.name }} - {{ champion.championspell_set.all.2.description }}
+                  </li>
+                  <li>
+                    <img src="{% static skill_images.R %}" alt="R spell image" class="spell-image">
+                    <strong>R:</strong> {{ champion.championspell_set.all.3.name }} - {{ champion.championspell_set.all.3.description }}
+                  </li>
+                </ul>
 
-                  <div class="skills-and-passive">
-                    <h2>스킬 빌드</h2>
-                    <ul>
-                      <li>
-                        <img src="{% static skill_images.Q %}" alt="Q spell image" class="spell-image">
-                        <strong>Q:</strong> {{ champion.championspell_set.all.0.name }} - {{ champion.championspell_set.all.0.description }}
-                      </li>
-                      <li>
-                        <img src="{% static skill_images.W %}" alt="W spell image" class="spell-image">
-                        <strong>W:</strong> {{ champion.championspell_set.all.1.name }} - {{ champion.championspell_set.all.1.description }}
-                      </li>
-                      <li>
-                        <img src="{% static skill_images.E %}" alt="E spell image" class="spell-image">
-                        <strong>E:</strong> {{ champion.championspell_set.all.2.name }} - {{ champion.championspell_set.all.2.description }}
-                      </li>
-                      <li>
-                        <img src="{% static skill_images.R %}" alt="R spell image" class="spell-image">
-                        <strong>R:</strong> {{ champion.championspell_set.all.3.name }} - {{ champion.championspell_set.all.3.description }}
-                      </li>
-                    </ul>
+                <h2>Passive</h2>
+                <p>
+                  <img src="{% static passive_image %}" alt="{{ champion.championpassive.name }} image" class="passive-image">
+                  <strong>{{ champion.championpassive.name }}:</strong> {{ champion.championpassive.description }}
+                </p>
+              </div>
+            </div>
 
-                    <h2>Passive</h2>
-                    <p>
-                      <img src="{% static passive_image %}" alt="{{ champion.championpassive.name }} image" class="passive-image">
-                      <strong>{{ champion.championpassive.name }}:</strong> {{ champion.championpassive.description }}
-                    </p>
-                  </div>
-
-                  <h2>스킨</h2>
-                  <div class="swiper mySwiper">
-                    <div class="swiper-wrapper">
-                      {% for skin_name, skin_image in skin_images.items %}
-                      <div class="swiper-slide">
-                        <img src="{% static skin_image %}" alt="{{ skin_name }} image" class="skin-image">
-                        <strong>{{ skin_name }}</strong>
-                      </div>
-                      {% endfor %}
+            <div class="row">
+              <div class="col-lg-12">
+                <h2>스킨</h2>
+                <div class="swiper mySwiper">
+                  <div class="swiper-wrapper">
+                    {% for skin_name, skin_image in skin_images.items %}
+                    <div class="swiper-slide">
+                      <img src="{% static skin_image %}" alt="{{ skin_name }} image" class="skin-image">
+                      <strong>{{ skin_name }}</strong>
                     </div>
-                    <!-- Add Arrows -->
-                    <div class="swiper-button-next"></div>
-                    <div class="swiper-button-prev"></div>
+                    {% endfor %}
                   </div>
-
-                  <div class="main-button">
-                    <a href="{% url 'champion_list' %}">챔피언 전체 목록</a>
-                  </div>
+                  <!-- Add Arrows -->
+                  <div class="swiper-button-next"></div>
+                  <div class="swiper-button-prev"></div>
                 </div>
               </div>
             </div>
-            <!-- ***** Champion Details End ***** -->
 
+            <div class="main-button">
+              <a href="{% url 'champion_list' %}">챔피언 전체 목록</a>
+            </div>
           </div>
+          <!-- ***** Champion Details End ***** -->
+
         </div>
       </div>
     </div>
