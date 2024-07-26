@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <title>top</title>
+  {% load static %}
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'assets/css/fontawesome.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/templatemo-cyborg-gaming.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/owl.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/animate.css' %}">
+  <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+  <style>
+    .nav a {
+      padding: 10px 20px;
+      display: inline-block;
+    }
+    .nav a:hover,
+    .nav a.active {
+      color: #ffffff;
+    }
+    .nav a:hover,
+    .nav a.active {
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <!-- ***** Header Area Start ***** -->
+  <header class="header-area header-sticky">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <nav class="main-nav">
+            <a href="{% url 'home' %}" class="logo">
+              <img src="{% static 'assets/images/logo.png' %}" alt="">
+            </a>
+            <div class="search-input">
+              <form id="search" action="#">
+                <input type="text" placeholder="Type Something" id='searchText' name="searchKeyword" onkeypress="handle" />
+                <i class="fa fa-search"></i>
+              </form>
+            </div>
+            <ul class="nav">
+              <li><a href="{% url 'home' %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">홈</a></li>
+              <li><a href="{% url 'champion_list' %}" class="{% if request.resolver_match.url_name == 'champion_list' %}active{% endif %}">챔피언 분석</a></li>
+              <li><a href="{% url 'player_list' %}" class="{% if request.resolver_match.url_name == 'player_list' %}active{% endif %}">로스터</a></li>
+              <li><a href="{% url 'match_list' %}" class="{% if request.resolver_match.url_name == 'match_list' %}active{% endif %}">경기일정</a></li>
+              <li><a href="" class="{% if request.resolver_match.url_name == 'streams' %}active{% endif %}">Streams</a></li>
+              <li><a href="" class="{% if request.resolver_match.url_name == 'login' %}active{% endif %}">Profile <img src="{% static 'assets/images/profile-header.jpg' %}" alt=""></a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+</body>
+</html>
