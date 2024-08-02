@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <title>champion_detail</title>
+
+  <!-- Load static files -->
+  {% load static %}
+
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+  <!-- Additional CSS Files -->
+  <link rel="stylesheet" href="{% static 'assets/css/fontawesome.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/templatemo-cyborg-gaming.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/owl.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/animate.css' %}">
+  <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+  <style>
+    .champion-details {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .champion-details img {
+      object-fit: cover;
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: 100%;
+      margin: 20px;
+      border-radius: 10px;
+      border: 2px solid #555;
+    }
+
+    .champion-details .text-content {
+      flex: 1;
+      max-width: 600px;
+      margin: 20px;
+      color: #fff;
+    }
+
+    .text-content h1 {
+      margin-bottom: 30px;
+    }
+
+    .text-content h2 {
+      margin-top: 50px;
+      margin-bottom: 30px;
+    }
+
+    .text-content p {
+      margin-bottom: 10px;
+    }
+
+    .passive-image {
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+      border-radius: 10%;
+      border: 2px solid #ec6090;
+    }
+
+    .page-content {
+      padding-top: 10px;
+    }
+
+    .most-popular {
+      margin-top: 10px;
+    }
+
+    .text-content a {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #ec6090;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .text-content .champion-details-text,
+    .text-content .spell-description {
+      color: #ddd;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    .skills-and-passive {
+      border: 2px solid #ec6090;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 30px;
+    }
+
+    .skills-and-passive h2 {
+      margin-top: 0;
+    }
+
+    .skills-and-passive ul {
+      padding-left: 20px;
+    }
+
+    .skills-and-passive li {
+      margin-bottom: 10px;
+    }
+
+    .spell-image {
+      width: 30px;
+      height: 30px;
+      margin-right: 10px;
+      vertical-align: middle;
+    }
+
+    .swiper {
+      width: 100%;
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+
+    .swiper-slide {
+      background-position: center;
+      background-size: cover;
+      width: 300px;
+      height: 400px;
+    }
+
+    .swiper-slide img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .swiper-button-next, .swiper-button-prev {
+      color: #fff;
+    }
+
+    .swiper-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+
+  <head>
+    {% include 'riot_app/top.html' %}
+  </head>
+</head>
+
+<body>
+
+  <!-- ***** Main Content Start ***** -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="page-content">
+
+          <!-- ***** Champion Details Start ***** -->
+          <div class="heading-section">
+            <h4><em>챔피언</em> 상세정보</h4>
+          </div>
+          <div class="most-popular">
+            <div class="row">
+              <div class="col-lg-12 champion-details">
+                <img src="{% static 'assets/images/loading/' %}{{ champion.id }}_0.jpg" alt="{{ champion.name }} image">
+                <div class="text-content">
+                  <h1>{{ champion.name }}</h1>
+                  <p><strong>{{ champion.title }}</strong></p>
+                  <p><strong>배경:</strong> {{ champion.lore }}</p>
+                  <p><strong>Tips:</strong> {{ champion.allytips }}</p>
+                  <p><strong>Enemy Tips:</strong> {{ champion.enemytips }}</p>
+                </div>
+              </div>
+              <div class="col-lg-12 skills-and-passive">
+                <h2>스킬 빌드</h2>
+                <ul>
+                  <li>
+                    <img src="{% static skill_images.Q %}" alt="Q spell image" class="spell-image">
+                    <strong>Q:</strong> {{ champion.championspell_set.all.0.name }} - {{ champion.championspell_set.all.0.description }}
+                  </li>
+                  <li>
+                    <img src="{% static skill_images.W %}" alt="W spell image" class="spell-image">
+                    <strong>W:</strong> {{ champion.championspell_set.all.1.name }} - {{ champion.championspell_set.all.1.description }}
+                  </li>
+                  <li>
+                    <img src="{% static skill_images.E %}" alt="E spell image" class="spell-image">
+                    <strong>E:</strong> {{ champion.championspell_set.all.2.name }} - {{ champion.championspell_set.all.2.description }}
+                  </li>
+                  <li>
+                    <img src="{% static skill_images.R %}" alt="R spell image" class="spell-image">
+                    <strong>R:</strong> {{ champion.championspell_set.all.3.name }} - {{ champion.championspell_set.all.3.description }}
+                  </li>
+                </ul>
+
+                <h2>Passive</h2>
+                <p>
+                  <img src="{% static passive_image %}" alt="{{ champion.championpassive.name }} image" class="passive-image">
+                  <strong>{{ champion.championpassive.name }}:</strong> {{ champion.championpassive.description }}
+                </p>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-12">
+                <h2>스킨</h2>
+                <div class="swiper mySwiper">
+                  <div class="swiper-wrapper">
+                    {% for skin_name, skin_image in skin_images.items %}
+                    <div class="swiper-slide">
+                      <img src="{% static skin_image %}" alt="{{ skin_name }} image" class="skin-image">
+                      <strong>{{ skin_name }}</strong>
+                    </div>
+                    {% endfor %}
+                  </div>
+                  <!-- Add Arrows -->
+                  <div class="swiper-button-next"></div>
+                  <div class="swiper-button-prev"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="main-button">
+              <a href="{% url 'champion_list' %}">챔피언 전체 목록</a>
+            </div>
+          </div>
+          <!-- ***** Champion Details End ***** -->
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- footer -->
+  {% include 'riot_app/bottom.html' %}
+
+  <!-- Scripts -->
+  <!-- Bootstrap core JavaScript -->
+  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'assets/js/isotope.min.js' %}"></script>
+  <script src="{% static 'assets/js/owl-carousel.js' %}"></script>
+  <script src="{% static 'assets/js/tabs.js' %}"></script>
+  <script src="{% static 'assets/js/popup.js' %}"></script>
+  <script src="{% static 'assets/js/custom.js' %}"></script>
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script>
+    var swiper = new Swiper('.mySwiper', {
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      loop: true,
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+      },
+    });
+  </script>
+
+</body>
+
+</html>
